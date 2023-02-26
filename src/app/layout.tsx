@@ -1,4 +1,9 @@
-import Provider from "./provider";
+"use client";
+
+import { CacheProvider } from "@chakra-ui/next-js";
+import { ChakraProvider } from "@chakra-ui/react";
+import Header from "./components/organisms/header";
+import Footer from "./components/organisms/footer";
 
 export default function RootLayout({
   children,
@@ -9,7 +14,13 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body>
-        <Provider>{children}</Provider>
+        <CacheProvider>
+          <ChakraProvider>
+            <Header />
+            {children}
+            <Footer />
+          </ChakraProvider>
+        </CacheProvider>
       </body>
     </html>
   );
