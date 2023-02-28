@@ -1,5 +1,5 @@
 import { Link } from "@chakra-ui/next-js";
-import { Flex, Heading, Button, Box } from "@chakra-ui/react";
+import { Flex, Heading, Box } from "@chakra-ui/react";
 
 export default function Header() {
   return (
@@ -9,9 +9,6 @@ export default function Header() {
           <Heading as="h1" size="lg">
             <Link href="/">yhakamay</Link>
           </Heading>
-          <Button as={Link} href="/articles/new">
-            New
-          </Button>
         </Flex>
       </Flex>
     </Box>
