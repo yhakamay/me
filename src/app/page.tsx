@@ -16,7 +16,7 @@ export default function Home() {
           </Text>
           <Box w={12} />
           <Image
-            src="/me.png"
+            src="/yhakamay.png"
             width={80}
             height={80}
             alt={""}
