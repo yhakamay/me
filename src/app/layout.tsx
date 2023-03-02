@@ -6,14 +6,21 @@ export const metadata = {
   title: "yhakamay",
   description:
     "yhakamay is ex-42 student, technical consultant, and Next.js lover.",
-  og: {
+  openGraph: {
     title: "yhakamay",
     type: "website",
-    url: "https://yhakamay.me",
-    image: "https://yhakamay.me/logo.png",
     description:
       "yhakamay is ex-42 student, technical consultant, and Next.js lover.",
-    site_name: "yhakamay",
+    siteName: "yhakamay",
+    url: "https://yhakamay.me",
+    images: [
+      {
+        url: "https://yhakamay.me/logo.png",
+        width: 512,
+        height: 512,
+        alt: "yhakamay",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
