@@ -1,9 +1,9 @@
 .main {
-  align-self: center;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 6rem;
+  padding: 2rem;
   min-height: 100vh;
 }
 
@@ -65,31 +65,4 @@
 
 .footer small {
   opacity: 0.3;
-}
-
-/* Mobile and Tablet */
-@media (max-width: 1023px) {
-  .main {
-    padding: 2rem;
-  }
-
-  .header {
-    align-items: flex-start;
-  }
-
-  .profile {
-    /*flex-direction: column;*/
-    align-items: flex-start;
-  }
-
-  .profile img {
-    width: 100%;
-    max-width: 60px;
-    height: auto;
-  }
-
-  .footer {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 }
