@@ -27,7 +27,12 @@ export default async function Home() {
           {repos.map((repo: any) => (
             <>
               <li>
-                <Link href={repo.html_url} key={repo.id}>
+                <Link
+                  href={repo.html_url}
+                  key={repo.id}
+                  target={"_blank"}
+                  rel={"noopener noreferrer"}
+                >
                   <p className={styles.repo}>{repo.name}</p>
                 </Link>
               </li>
