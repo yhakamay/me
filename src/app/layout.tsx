@@ -24,8 +24,11 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@yhakamay",
+    title: "yhakamay",
+    description:
+      "yhakamay is ex-42 student, technical consultant, and Next.js lover.",
     creator: "@yhakamay",
+    images: ["https://yhakamay.me/logo.png"],
   },
 };
 
