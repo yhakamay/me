@@ -39,6 +39,11 @@ export default async function Home() {
             </>
           ))}
         </ul>
+        <div className={styles.more}>
+          <a href="https://github.com/yhakamay?tab=repositories">
+            <p>More on GitHub →</p>
+          </a>
+        </div>
       </div>
       <div className={styles.section}>
         <h3>Contacts</h3>
