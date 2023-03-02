@@ -25,7 +25,7 @@ export default async function Home() {
       <div className={styles.section}>
         <h3>Repositories</h3>
         <ul>
-          {repos.map((repo: any) => (
+          {repos.slice(0, 10).map((repo: any) => (
             <>
               <li key={repo.id}>
                 <Link
