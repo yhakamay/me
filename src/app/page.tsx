@@ -25,12 +25,11 @@ export default async function Home() {
       <div className={styles.section}>
         <h3>Repositories</h3>
         <ul>
-          {repos.map((repo: any) => (
+          {repos.slice(0, 10).map((repo: any) => (
             <>
-              <li>
+              <li key={repo.id}>
                 <Link
                   href={repo.html_url}
-                  key={repo.id}
                   target={"_blank"}
                   rel={"noopener noreferrer"}
                 >
@@ -40,6 +39,11 @@ export default async function Home() {
             </>
           ))}
         </ul>
+        <div className={styles.more}>
+          <a href="https://github.com/yhakamay?tab=repositories">
+            <p>More on GitHub →</p>
+          </a>
+        </div>
       </div>
       <div className={styles.section}>
         <h3>Contacts</h3>

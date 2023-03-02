@@ -38,6 +38,11 @@
   opacity: 0.7;
 }
 
+.more {
+  margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
 .icons {
   opacity: 0.7;
   display: flex;
