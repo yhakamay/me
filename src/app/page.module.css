@@ -1,4 +1,5 @@
 .main {
+  max-width: 400px;
   align-self: center;
   display: flex;
   flex-direction: column;
