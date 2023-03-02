@@ -19,7 +19,7 @@ export default async function Home() {
           <p>
             yhakamay is ex-42 student, technical consultant, and Next.js lover.
           </p>
-          <Image src="/yhakamay.png" width={80} height={80} alt={"yhakamay"} />
+          <Image src="/yhakamay.png" width={60} height={60} alt={"yhakamay"} />
         </div>
       </div>
       <div className={styles.section}>
