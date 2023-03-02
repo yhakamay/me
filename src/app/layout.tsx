@@ -15,7 +15,7 @@ export const metadata = {
     url: "https://yhakamay.me",
     images: [
       {
-        url: "https://yhakamay.me/logo.png",
+        url: "https://yhakamay.me/og.png",
         width: 512,
         height: 512,
         alt: "yhakamay",
@@ -28,7 +28,7 @@ export const metadata = {
     description:
       "yhakamay is ex-42 student, technical consultant, and Next.js lover.",
     creator: "@yhakamay",
-    images: ["https://yhakamay.me/logo.png"],
+    images: ["https://yhakamay.me/og.png"],
   },
 };
 
