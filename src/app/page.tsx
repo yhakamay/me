@@ -1,36 +1,48 @@
-"use client";
-
-import Repos from "@/components/molecules/repos";
-import { Link } from "@chakra-ui/next-js";
-import { Box, Heading, HStack, Text, VStack } from "@chakra-ui/react";
 import Image from "next/image";
+import Link from "next/link";
 import { BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
+import styles from "./page.module.css";
 
-export default function Home() {
+export default async function Home() {
+  const repos = await getRepos();
+
   return (
-    <>
-      <VStack align={"start"}>
-        <HStack>
-          <Text>
+    <main className={styles.main}>
+      <div className={styles.header}>
+        <Link href="/">
+          <Image src="/logo.png" width={24} height={24} alt={""} />
+        </Link>
+      </div>
+      <div className={styles.section}>
+        <div className={styles.profile}>
+          <p>
             yhakamay is ex-42 student, technical consultant, and Next.js lover.
-          </Text>
-          <Box w={12} />
-          <Image
-            src="/yhakamay.png"
-            width={80}
-            height={80}
-            alt={""}
-            style={{ borderRadius: "20%" }}
-          />
-        </HStack>
-        <Heading size={"sm"} pt={4}>
-          Repositories
-        </Heading>
-        <Repos />
-        <Heading size={"sm"} pt={8} pb={2}>
-          Contacts
-        </Heading>
-        <HStack spacing={6}>
+          </p>
+          <Image src="/yhakamay.png" width={80} height={80} alt={"yhakamay"} />
+        </div>
+      </div>
+      <div className={styles.section}>
+        <h3>Repositories</h3>
+        <ul>
+          {repos.map((repo: any) => (
+            <>
+              <li>
+                <Link
+                  href={repo.html_url}
+                  key={repo.id}
+                  target={"_blank"}
+                  rel={"noopener noreferrer"}
+                >
+                  <p className={styles.repo}>{repo.name}</p>
+                </Link>
+              </li>
+            </>
+          ))}
+        </ul>
+      </div>
+      <div className={styles.section}>
+        <h3>Contacts</h3>
+        <div className={styles.icons}>
           <Link
             href="https://twitter.com/yhakamay"
             target={"_blank"}
@@ -52,8 +64,28 @@ export default function Home() {
           >
             <BsLinkedin size={24} />
           </Link>
-        </HStack>
-      </VStack>
-    </>
+        </div>
+      </div>
+      <div className={styles.footer}>
+        <small>© 2023 yhakamay</small>
+      </div>
+    </main>
   );
+}
+
+async function getRepos() {
+  const res = await fetch(
+    "https://api.github.com/users/yhakamay/repos?sort=created&direction=desc",
+    {
+      next: {
+        revalidate: 60 * 60 * 24,
+      },
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+
+  return res.json();
 }

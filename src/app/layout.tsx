@@ -1,11 +1,11 @@
-"use client";
+import "./globals.css";
 
 import { Inter } from "next/font/google";
-import { CacheProvider } from "@chakra-ui/next-js";
-import { ChakraProvider } from "@chakra-ui/react";
-import Header from "../components/organisms/header";
-import Footer from "../components/organisms/footer";
-import Main from "../components/organisms/main";
+
+export const metadata = {
+  title: "yhakamay",
+  description: "yhakamay.me",
+};
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,15 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body className={inter.className}>
-        <CacheProvider>
-          <ChakraProvider>
-            <Header />
-            <Main>{children}</Main>
-            <Footer />
-          </ChakraProvider>
-        </CacheProvider>
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
