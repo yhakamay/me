@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
+
 import styles from "./page.module.css";
 
 export default async function Home() {
