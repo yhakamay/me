@@ -26,17 +26,15 @@ export default async function Home() {
         <h3>Repositories</h3>
         <ul>
           {repos.slice(0, 10).map((repo: any) => (
-            <>
-              <li key={repo.id}>
-                <Link
-                  href={repo.html_url}
-                  target={"_blank"}
-                  rel={"noopener noreferrer"}
-                >
-                  <p className={styles.repo}>{repo.name}</p>
-                </Link>
-              </li>
-            </>
+            <li key={repo.id}>
+              <Link
+                href={repo.html_url}
+                target={"_blank"}
+                rel={"noopener noreferrer"}
+              >
+                <p className={styles.repo}>{repo.name}</p>
+              </Link>
+            </li>
           ))}
         </ul>
         <div className={styles.more}>
@@ -53,21 +51,21 @@ export default async function Home() {
             target={"_blank"}
             rel={"noopener noreferrer"}
           >
-            <BsTwitter size={24} />
+            <BsTwitter size={24} className={styles.icon} />
           </Link>
           <Link
             href="https://www.instagram.com/yhakamay/"
             target={"_blank"}
             rel={"noopener noreferrer"}
           >
-            <BsInstagram size={24} />
+            <BsInstagram size={24} className={styles.icon} />
           </Link>
           <Link
             href="https://www.linkedin.com/in/yusuke-hakamaya/"
             target={"_blank"}
             rel={"noopener noreferrer"}
           >
-            <BsLinkedin size={24} />
+            <BsLinkedin size={24} className={styles.icon} />
           </Link>
         </div>
       </div>

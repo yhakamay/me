@@ -31,15 +31,17 @@
 
 .profile img {
   border-radius: 20%;
-  border: 0.5rem solid var(--primary-glow);
+  border: 0.4rem solid var(--primary-glow);
 }
 
 .repo {
+  min-width: 48px;
+  margin-top: 1rem;
   opacity: 0.7;
 }
 
 .more {
-  margin-top: 0.5rem;
+  margin-top: 1.2rem;
   opacity: 0.9;
 }
 
@@ -52,6 +54,12 @@
   align-items: center;
   width: var(--max-width);
   max-width: 100%;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+  padding: 0.2rem 0.2rem 0.2rem 0;
 }
 
 .footer {
