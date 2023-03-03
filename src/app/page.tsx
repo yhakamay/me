@@ -32,7 +32,10 @@ export default async function Home() {
                 target={"_blank"}
                 rel={"noopener noreferrer"}
               >
-                <p className={styles.repo}>{repo.name}</p>
+                <p className={styles.repo_name}>{repo.name}</p>
+                {repo.description && (
+                  <p className={styles.repo_description}>{repo.description}</p>
+                )}
               </Link>
             </li>
           ))}
