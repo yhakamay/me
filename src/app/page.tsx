@@ -11,10 +11,14 @@ export default async function Home() {
     <main className={styles.main}>
       <div className={styles.header}>
         <Link href="/">
-          <Image src="/logo.png" width={24} height={24} alt={""} />
+          <Image src="/logo.png" width={24} height={24} alt={"logo"} />
         </Link>
-        <Link href="https://github.com/yhakamay/me/">
-          <BsGithub className={styles.icon} />
+        <Link
+          href="https://github.com/yhakamay/me/"
+          target={"_blank"}
+          rel={"noopener noreferrer"}
+        >
+          <BsGithub className={styles.icon} aria-label="github" />
         </Link>
       </div>
       <div className={styles.section}>
@@ -57,21 +61,29 @@ export default async function Home() {
             target={"_blank"}
             rel={"noopener noreferrer"}
           >
-            <BsTwitter size={24} className={styles.icon} />
+            <BsTwitter size={24} className={styles.icon} aria-label="twitter" />
           </Link>
           <Link
             href="https://www.instagram.com/yhakamay/"
             target={"_blank"}
             rel={"noopener noreferrer"}
           >
-            <BsInstagram size={24} className={styles.icon} />
+            <BsInstagram
+              size={24}
+              className={styles.icon}
+              aria-label="instagram"
+            />
           </Link>
           <Link
             href="https://www.linkedin.com/in/yusuke-hakamaya/"
             target={"_blank"}
             rel={"noopener noreferrer"}
           >
-            <BsLinkedin size={24} className={styles.icon} />
+            <BsLinkedin
+              size={24}
+              className={styles.icon}
+              aria-label="linkedin"
+            />
           </Link>
         </div>
       </div>
