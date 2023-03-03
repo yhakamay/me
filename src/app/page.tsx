@@ -26,17 +26,15 @@ export default async function Home() {
         <h3>Repositories</h3>
         <ul>
           {repos.slice(0, 10).map((repo: any) => (
-            <>
-              <li key={repo.id}>
-                <Link
-                  href={repo.html_url}
-                  target={"_blank"}
-                  rel={"noopener noreferrer"}
-                >
-                  <p className={styles.repo}>{repo.name}</p>
-                </Link>
-              </li>
-            </>
+            <li key={repo.id}>
+              <Link
+                href={repo.html_url}
+                target={"_blank"}
+                rel={"noopener noreferrer"}
+              >
+                <p className={styles.repo}>{repo.name}</p>
+              </Link>
+            </li>
           ))}
         </ul>
         <div className={styles.more}>
