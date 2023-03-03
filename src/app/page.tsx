@@ -13,7 +13,11 @@ export default async function Home() {
         <Link href="/">
           <Image src="/logo.png" width={24} height={24} alt={"logo"} />
         </Link>
-        <Link href="https://github.com/yhakamay/me/">
+        <Link
+          href="https://github.com/yhakamay/me/"
+          target={"_blank"}
+          rel={"noopener noreferrer"}
+        >
           <BsGithub className={styles.icon} aria-label="github" />
         </Link>
       </div>
