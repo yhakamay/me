@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
+import { BsGithub, BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 
 import styles from "./page.module.css";
 
@@ -12,6 +12,9 @@ export default async function Home() {
       <div className={styles.header}>
         <Link href="/">
           <Image src="/logo.png" width={24} height={24} alt={""} />
+        </Link>
+        <Link href="https://github.com/yhakamay/me/">
+          <BsGithub className={styles.icon} />
         </Link>
       </div>
       <div className={styles.section}>
