@@ -81,7 +81,7 @@ export default async function Home() {
 
 async function getRepos() {
   const res = await fetch(
-    "https://api.github.com/users/yhakamay/repos?sort=created&direction=desc",
+    "https://api.github.com/users/yhakamay/repos?sort=updated&direction=desc",
     {
       next: {
         revalidate: 60 * 60 * 24,
