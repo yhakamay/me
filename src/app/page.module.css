@@ -56,6 +56,12 @@
   max-width: 100%;
 }
 
+.icon {
+  width: 2rem;
+  height: 2rem;
+  padding: 0.2rem 0.2rem 0.2rem 0;
+}
+
 .footer {
   display: flex;
   justify-content: flex-start;

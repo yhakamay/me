@@ -51,21 +51,21 @@ export default async function Home() {
             target={"_blank"}
             rel={"noopener noreferrer"}
           >
-            <BsTwitter size={24} />
+            <BsTwitter size={24} className={styles.icon} />
           </Link>
           <Link
             href="https://www.instagram.com/yhakamay/"
             target={"_blank"}
             rel={"noopener noreferrer"}
           >
-            <BsInstagram size={24} />
+            <BsInstagram size={24} className={styles.icon} />
           </Link>
           <Link
             href="https://www.linkedin.com/in/yusuke-hakamaya/"
             target={"_blank"}
             rel={"noopener noreferrer"}
           >
-            <BsLinkedin size={24} />
+            <BsLinkedin size={24} className={styles.icon} />
           </Link>
         </div>
       </div>
