@@ -16,10 +16,10 @@ export default async function Home() {
       </div>
       <div className={styles.section}>
         <div className={styles.profile}>
+          <Image src="/yhakamay.png" width={60} height={60} alt={"yhakamay"} />
           <p>
             yhakamay is ex-42 student, technical consultant, and Next.js lover.
           </p>
-          <Image src="/yhakamay.png" width={60} height={60} alt={"yhakamay"} />
         </div>
       </div>
       <div className={styles.section}>
