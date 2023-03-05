@@ -58,7 +58,7 @@ export default async function Home() {
       </div>
       <div className={styles.section}>
         <h3>Posts</h3>
-        <div className={styles.gallery}>
+        <div className={styles.posts}>
           <Posts posts={posts} />
         </div>
       </div>
