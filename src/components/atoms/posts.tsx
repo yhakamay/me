@@ -16,9 +16,10 @@ export default function Posts({ posts }: { posts: any }) {
         className={styles.overlay}
         onClick={handleClose}
         variants={{
-          close: { display: "none", opacity: 0 },
+          close: {},
           open: {
             display: "block",
+            position: "fixed",
             opacity: 0.9,
           },
         }}
@@ -35,8 +36,6 @@ export default function Posts({ posts }: { posts: any }) {
             variants={{
               close: {},
               open: {
-                display: "flex",
-                justifyContent: "center",
                 position: "fixed",
                 top: "50%",
                 left: "50%",
