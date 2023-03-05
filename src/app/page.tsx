@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { BsGithub, BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 
+import Posts from "@/components/atoms/posts";
+
 import styles from "./page.module.css";
 
 export default async function Home() {
@@ -55,19 +57,9 @@ export default async function Home() {
         </div>
       </div>
       <div className={styles.section}>
-        <h3>Gallery</h3>
+        <h3>Posts</h3>
         <div className={styles.gallery}>
-          {posts.map((post: any) => (
-            <div className={styles.card} key={post.id}>
-              <Image
-                src="/yoga.svg"
-                width={200}
-                height={200}
-                alt={"gallery"}
-                className={styles.gallery}
-              />
-            </div>
-          ))}
+          <Posts posts={posts} />
         </div>
       </div>
       <div className={styles.section}>
@@ -130,7 +122,7 @@ async function getRepos() {
 
 async function getPosts() {
   const res = await fetch(
-    "https://jsonplaceholder.typicode.com/posts?_limit=4",
+    "https://jsonplaceholder.typicode.com/posts?_limit=20",
     {
       next: {
         revalidate: 60 * 60 * 24,
