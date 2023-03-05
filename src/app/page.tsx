@@ -6,6 +6,7 @@ import styles from "./page.module.css";
 
 export default async function Home() {
   const repos = await getRepos();
+  const posts = await getPosts();
 
   return (
     <main className={styles.main}>
@@ -54,6 +55,22 @@ export default async function Home() {
         </div>
       </div>
       <div className={styles.section}>
+        <h3>Gallery</h3>
+        <div className={styles.gallery}>
+          {posts.map((post: any) => (
+            <div className={styles.card} key={post.id}>
+              <Image
+                src="/yoga.svg"
+                width={200}
+                height={200}
+                alt={"gallery"}
+                className={styles.gallery}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className={styles.section}>
         <h3>Contacts</h3>
         <div className={styles.icons}>
           <Link
@@ -97,6 +114,23 @@ export default async function Home() {
 async function getRepos() {
   const res = await fetch(
     "https://api.github.com/users/yhakamay/repos?sort=updated&direction=desc",
+    {
+      next: {
+        revalidate: 60 * 60 * 24,
+      },
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+
+  return res.json();
+}
+
+async function getPosts() {
+  const res = await fetch(
+    "https://jsonplaceholder.typicode.com/posts?_limit=4",
     {
       next: {
         revalidate: 60 * 60 * 24,

@@ -53,6 +53,25 @@
   opacity: 0.9;
 }
 
+.gallery {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  padding: 1rem;
+  border: 0.1rem solid black;
+  border-radius: 0.5rem;
+}
+
 .icons {
   display: flex;
   flex-direction: row;
