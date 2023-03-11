@@ -17,9 +17,29 @@ export default function Repos(props: ReposProps) {
   return (
     <section className={styles.repos}>
       <h3>Repositories</h3>
-      <ul>
-        {repos.slice(0, 10).map((repo: Repo) => (
-          <li key={repo.id}>
+      <motion.ul
+        transition={{
+          staggerChildren: 0.01,
+        }}
+      >
+        {repos.slice(0, 10).map((repo: Repo, index) => (
+          <motion.li
+            key={repo.id}
+            custom={index}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              visible: (i) => ({
+                opacity: 1,
+                transition: {
+                  delay: i * 0.04,
+                  duration: 0.5,
+                  ease: "easeInOut",
+                },
+              }),
+              hidden: { opacity: 0 },
+            }}
+          >
             <Link
               href={repo.html_url}
               target={"_blank"}
@@ -34,12 +54,24 @@ export default function Repos(props: ReposProps) {
                 </p>
               )}
             </Link>
-          </li>
+          </motion.li>
         ))}
-      </ul>
+      </motion.ul>
       <div className={styles.more}>
         <a href="https://github.com/yhakamay?tab=repositories">
-          <motion.p>More on GitHub →</motion.p>
+          <motion.p
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{
+              type: "spring",
+              duration: 2,
+              stiffness: 100,
+              delay: 1,
+            }}
+          >
+            More on GitHub →
+          </motion.p>
         </a>
       </div>
     </section>
