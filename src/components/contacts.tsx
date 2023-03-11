@@ -19,7 +19,7 @@ export default function Contacts() {
             type: "spring",
             duration: 2,
             stiffness: 100,
-            delay: 1,
+            delay: 0.6,
           }}
         >
           <Link
@@ -38,7 +38,7 @@ export default function Contacts() {
             type: "spring",
             duration: 2,
             stiffness: 100,
-            delay: 1.2,
+            delay: 0.8,
           }}
         >
           <Link
@@ -61,7 +61,7 @@ export default function Contacts() {
             type: "spring",
             duration: 2,
             stiffness: 100,
-            delay: 1.4,
+            delay: 1,
           }}
         >
           <Link

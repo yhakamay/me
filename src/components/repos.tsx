@@ -17,11 +17,7 @@ export default function Repos(props: ReposProps) {
   return (
     <section className={styles.repos}>
       <h3>Repositories</h3>
-      <motion.ul
-        transition={{
-          staggerChildren: 0.01,
-        }}
-      >
+      <motion.ul>
         {repos.slice(0, 10).map((repo: Repo, index) => (
           <motion.li
             key={repo.id}
@@ -33,7 +29,7 @@ export default function Repos(props: ReposProps) {
                 opacity: 1,
                 transition: {
                   delay: i * 0.04,
-                  duration: 0.5,
+                  duration: 0.4,
                   ease: "easeInOut",
                 },
               }),
@@ -65,9 +61,9 @@ export default function Repos(props: ReposProps) {
             viewport={{ once: true }}
             transition={{
               type: "spring",
-              duration: 2,
+              duration: 1,
               stiffness: 100,
-              delay: 1,
+              delay: 0.8,
             }}
           >
             More on GitHub →
