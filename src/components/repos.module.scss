@@ -1,0 +1,22 @@
+.repos {
+  .name {
+    min-width: 48px;
+    margin-top: 1rem;
+  }
+
+  .description {
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    opacity: 0.8;
+
+    &.not_provided {
+      font-style: italic;
+      opacity: 0.5;
+    }
+  }
+
+  .more {
+    margin-top: 1.2rem;
+    opacity: 0.9;
+  }
+}
