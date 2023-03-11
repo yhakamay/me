@@ -40,8 +40,14 @@ export default async function Home() {
                 rel={"noopener noreferrer"}
               >
                 <p className={styles.repo_name}>{repo.name}</p>
-                {repo.description && (
+                {repo.description ? (
                   <p className={styles.repo_description}>{repo.description}</p>
+                ) : (
+                  <p
+                    className={`${styles.repo_description} ${styles.not_provided}`}
+                  >
+                    {repo.description ?? "(no description)"}
+                  </p>
                 )}
               </Link>
             </li>
