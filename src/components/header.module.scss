@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  width: var(--max-width);
+  max-width: 100%;
+  margin-bottom: 2rem;
+
+  .icon_header {
+    padding-right: 0 !important;
+  }
+}

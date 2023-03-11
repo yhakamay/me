@@ -1,38 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BsGithub, BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
+import { BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 
-import styles from "./page.module.css";
+import styles from "./page.module.scss";
 
 export default async function Home() {
   const repos = await getRepos();
 
   return (
     <main className={styles.main}>
-      <div className={styles.header}>
-        <Link href="/">
-          <Image src="/logo.png" width={24} height={24} alt={"logo"} />
-        </Link>
-        <Link
-          href="https://github.com/yhakamay/me/"
-          target={"_blank"}
-          rel={"noopener noreferrer"}
-        >
-          <BsGithub
-            className={`${styles.icon} ${styles.icon_header}`}
-            aria-label="github"
-          />
-        </Link>
-      </div>
-      <div className={styles.section}>
-        <div className={styles.profile}>
-          <Image src="/yhakamay.png" width={60} height={60} alt={"yhakamay"} />
-          <p>
-            yhakamay is ex-42 student, technical consultant, and Next.js lover.
-          </p>
-        </div>
-      </div>
-      <div className={styles.section}>
+      <section className={styles.profile}>
+        <Image src="/yhakamay.png" width={60} height={60} alt={"yhakamay"} />
+        <p>
+          yhakamay is ex-42 student, technical consultant, and Next.js lover.
+        </p>
+      </section>
+      <section className={styles.repos}>
         <h3>Repositories</h3>
         <ul>
           {repos.slice(0, 10).map((repo: any) => (
@@ -42,13 +25,11 @@ export default async function Home() {
                 target={"_blank"}
                 rel={"noopener noreferrer"}
               >
-                <p className={styles.repo_name}>{repo.name}</p>
+                <p className={styles.name}>{repo.name}</p>
                 {repo.description ? (
-                  <p className={styles.repo_description}>{repo.description}</p>
+                  <p className={styles.description}>{repo.description}</p>
                 ) : (
-                  <p
-                    className={`${styles.repo_description} ${styles.not_provided}`}
-                  >
+                  <p className={`${styles.description} ${styles.not_provided}`}>
                     {repo.description ?? "(no description)"}
                   </p>
                 )}
@@ -61,8 +42,8 @@ export default async function Home() {
             <p>More on GitHub →</p>
           </a>
         </div>
-      </div>
-      <div className={styles.section}>
+      </section>
+      <section className={styles.contacts}>
         <h3>Contacts</h3>
         <div className={styles.icons}>
           <Link
@@ -95,10 +76,7 @@ export default async function Home() {
             />
           </Link>
         </div>
-      </div>
-      <div className={styles.footer}>
-        <small>© 2023 yhakamay</small>
-      </div>
+      </section>
     </main>
   );
 }

@@ -1,0 +1,12 @@
+.footer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  align-items: center;
+  width: var(--max-width);
+  max-width: 100%;
+
+  small {
+    opacity: 0.3;
+  }
+}

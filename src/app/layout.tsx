@@ -3,6 +3,9 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 
+import Footer from "@/components/footer";
+import Header from "@/components/header";
+
 export const metadata = {
   title: "yhakamay",
   description:
@@ -46,7 +49,9 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body className={inter.className}>
+        <Header />
         {children}
+        <Footer />
         <Analytics />
       </body>
     </html>
