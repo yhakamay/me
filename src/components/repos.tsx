@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { Repo } from "@/types/repo";
 
+import FadeInSection from "./fade_in_section";
 import styles from "./repos.module.scss";
 
 type ReposProps = {
@@ -15,7 +16,7 @@ export default function Repos(props: ReposProps) {
   const { repos } = props;
 
   return (
-    <section className={styles.repos}>
+    <FadeInSection className={styles.repos}>
       <h3>Repositories</h3>
       <motion.ul>
         {repos.slice(0, 10).map((repo: Repo, index) => (
@@ -27,13 +28,14 @@ export default function Repos(props: ReposProps) {
             variants={{
               visible: (i) => ({
                 opacity: 1,
+                y: 0,
                 transition: {
                   delay: i * 0.04,
-                  duration: 0.4,
+                  duration: 1,
                   ease: "easeInOut",
                 },
               }),
-              hidden: { opacity: 0 },
+              hidden: { opacity: 0, y: 8 },
             }}
           >
             <Link
@@ -74,6 +76,6 @@ export default function Repos(props: ReposProps) {
           </motion.p>
         </Link>
       </div>
-    </section>
+    </FadeInSection>
   );
 }

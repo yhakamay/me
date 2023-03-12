@@ -5,10 +5,11 @@ import Link from "next/link";
 import { BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 
 import styles from "./contacts.module.scss";
+import FadeInSection from "./fade_in_section";
 
 export default function Contacts() {
   return (
-    <section className={styles.contacts}>
+    <FadeInSection className={styles.contacts}>
       <h3>Contacts</h3>
       <motion.ul className={styles.icons}>
         <motion.li
@@ -77,6 +78,6 @@ export default function Contacts() {
           </Link>
         </motion.li>
       </motion.ul>
-    </section>
+    </FadeInSection>
   );
 }
