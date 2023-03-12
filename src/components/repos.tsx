@@ -54,7 +54,11 @@ export default function Repos(props: ReposProps) {
         ))}
       </motion.ul>
       <div className={styles.more}>
-        <a href="https://github.com/yhakamay?tab=repositories">
+        <Link
+          href="https://github.com/yhakamay?tab=repositories"
+          target={"_blank"}
+          rel={"noopener noreferrer"}
+        >
           <motion.p
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -68,7 +72,7 @@ export default function Repos(props: ReposProps) {
           >
             More on GitHub →
           </motion.p>
-        </a>
+        </Link>
       </div>
     </section>
   );
