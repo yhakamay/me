@@ -15,10 +15,7 @@ export default function Header() {
         target={"_blank"}
         rel={"noopener noreferrer"}
       >
-        <BsGithub
-          className={`${styles.icon} ${styles.icon_header}`}
-          aria-label="github"
-        />
+        <BsGithub className={`${styles.icon}`} aria-label="github" />
       </Link>
     </header>
   );
