@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-import FadeInSection from "./fade_in_section";
+import FadeInSection from "../molecules/fade_in_section";
+
 import styles from "./profile.module.scss";
 
 export default function Profile() {

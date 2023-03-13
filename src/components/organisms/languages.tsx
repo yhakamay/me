@@ -29,7 +29,8 @@ import {
 
 import { RepoLanguage } from "@/types/repo_languages";
 
-import FadeInSection from "./fade_in_section";
+import FadeInSection from "../molecules/fade_in_section";
+
 import styles from "./languages.module.scss";
 
 type LanguagesProps = {
@@ -41,8 +42,6 @@ export default function Languages(props: LanguagesProps) {
   const maxCount = Math.max(...languages.map((language) => language.count));
   const sortedLanguages = languages.sort((a, b) => b.count - a.count);
   const topTenLanguages = sortedLanguages.slice(0, 10);
-
-  console.log(sortedLanguages);
 
   return (
     <FadeInSection className={styles.languages}>
