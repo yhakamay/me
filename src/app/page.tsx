@@ -1,4 +1,3 @@
-import Contacts from "@/components/organisms/contacts";
 import Languages from "@/components/organisms/languages";
 import Profile from "@/components/organisms/profile";
 import Repos from "@/components/organisms/repos";
@@ -14,7 +13,6 @@ export default async function Home() {
       <Profile />
       <Languages languages={languages} />
       <Repos repos={repos} />
-      <Contacts />
     </>
   );
 }

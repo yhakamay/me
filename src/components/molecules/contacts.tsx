@@ -2,17 +2,14 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
-
-import FadeInSection from "../molecules/fade_in_section";
+import { BsTwitter, BsInstagram, BsLinkedin } from "react-icons/bs";
 
 import styles from "./contacts.module.scss";
 
 export default function Contacts() {
   return (
-    <FadeInSection className={styles.contacts}>
-      <h3>Contacts</h3>
-      <motion.ul className={styles.icons}>
+    <div className={styles.contacts}>
+      <ul className={styles.icons}>
         <motion.li
           initial={{ opacity: 0, scale: 0.5 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -78,7 +75,7 @@ export default function Contacts() {
             />
           </Link>
         </motion.li>
-      </motion.ul>
-    </FadeInSection>
+      </ul>
+    </div>
   );
 }
