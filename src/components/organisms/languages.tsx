@@ -43,8 +43,6 @@ export default function Languages(props: LanguagesProps) {
   const sortedLanguages = languages.sort((a, b) => b.count - a.count);
   const topTenLanguages = sortedLanguages.slice(0, 10);
 
-  console.log(sortedLanguages);
-
   return (
     <FadeInSection className={styles.languages}>
       <h3>Languages</h3>
