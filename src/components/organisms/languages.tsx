@@ -47,25 +47,29 @@ export default function Languages(props: LanguagesProps) {
     <FadeInSection className={styles.languages}>
       <h3>Languages</h3>
       <ul>
-        {topTenLanguages.map((language) => {
+        {topTenLanguages.map((language, index) => {
           const { name, count } = language;
           const languageIcon = getLanguageIcon(name);
 
           return (
             <li key={name} className={styles.language}>
               {languageIcon}
-              <p className={styles.name}>{language.name}</p>
-              <motion.div
-                className={styles.bar}
-                initial={{ width: 0 }}
-                animate={{ width: `${(count / maxCount) * 70}%` }}
-                transition={{
-                  type: "spring",
-                  delay: 0.4,
-                  stiffness: 30,
-                  damping: 12,
-                }}
-              />
+              <div className={styles.bar_container}>
+                <motion.div
+                  className={styles.bar}
+                  initial={{ width: 0 }}
+                  animate={{ width: `${(count / maxCount) * 100}%` }}
+                  transition={{
+                    type: "spring",
+                    delay: 0.4,
+                    stiffness: 30,
+                    damping: 12,
+                  }}
+                >
+                  <p className={styles.name}>{language.name}</p>
+                </motion.div>
+              </div>
+              <p className={styles.count}>{language.count}</p>
             </li>
           );
         })}
