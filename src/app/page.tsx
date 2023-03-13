@@ -38,8 +38,14 @@ async function getRepos() {
   return res.json();
 }
 
-export async function getAllLanguages(repos: Repo[]): Promise<RepoLanguage[]> {
-  const promises = repos.map((repo) => fetch(repo.languages_url));
+async function getAllLanguages(repos: Repo[]): Promise<RepoLanguage[]> {
+  const promises = repos.map((repo) =>
+    fetch(repo.languages_url, {
+      next: {
+        revalidate: 60 * 60 * 24,
+      },
+    })
+  );
   const responses = await Promise.all(promises);
 
   const languageMaps = await Promise.all(
