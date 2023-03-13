@@ -1,54 +1,65 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { BsFiletypeScss } from "react-icons/bs";
+import { FaJava } from "react-icons/fa";
 import {
   Si42,
   SiC,
+  SiCmake,
   SiCplusplus,
   SiCsharp,
   SiCss3,
   SiDart,
+  SiDocker,
   SiGo,
   SiHtml5,
   SiJavascript,
+  SiJupyter,
+  SiKotlin,
+  SiLess,
   SiPhp,
   SiPython,
   SiRuby,
   SiRust,
   SiShell,
+  SiSwift,
   SiTypescript,
 } from "react-icons/si";
+
+import { RepoLanguage } from "@/types/repo_languages";
 
 import FadeInSection from "./fade_in_section";
 import styles from "./languages.module.scss";
 
 type LanguagesProps = {
-  languages: [string, number][];
+  languages: RepoLanguage[];
 };
 
 export default function Languages(props: LanguagesProps) {
   const { languages } = props;
-  const topLanguages = languages.slice(0, 5);
+  const maxCount = Math.max(...languages.map((language) => language.count));
+  const sortedLanguages = languages.sort((a, b) => b.count - a.count);
+  const topTenLanguages = sortedLanguages.slice(0, 10);
+
+  console.log(sortedLanguages);
 
   return (
     <FadeInSection className={styles.languages}>
       <h3>Languages</h3>
       <ul>
-        {topLanguages.map(([language, count]) => {
-          const languageIcon = getLanguageIcon(language);
-          const maxUsage = topLanguages[0][1];
+        {topTenLanguages.map((language) => {
+          const { name, count } = language;
+          const languageIcon = getLanguageIcon(name);
 
           return (
-            <li key={language} className={styles.language}>
+            <li key={name} className={styles.language}>
               {languageIcon}
+              <p className={styles.name}>{language.name}</p>
               <motion.div
                 className={styles.bar}
-                initial={{
-                  width: 0,
-                }}
-                animate={{
-                  width: `${(count / maxUsage) * 100}%`,
-                }}
+                initial={{ width: 0 }}
+                animate={{ width: `${(count / maxCount) * 70}%` }}
                 transition={{
                   type: "spring",
                   delay: 0.4,
@@ -94,6 +105,22 @@ function getLanguageIcon(language: string) {
       return <SiRust />;
     case "Dart":
       return <SiDart />;
+    case "Java":
+      return <FaJava />;
+    case "SCSS":
+      return <BsFiletypeScss />;
+    case "CMake":
+      return <SiCmake />;
+    case "Swift":
+      return <SiSwift />;
+    case "Dockerfile":
+      return <SiDocker />;
+    case "Jupyter Notebook":
+      return <SiJupyter />;
+    case "Less":
+      return <SiLess />;
+    case "Kotlin":
+      return <SiKotlin />;
     default:
       return <Si42 />;
   }
