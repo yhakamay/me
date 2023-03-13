@@ -29,7 +29,8 @@ import {
 
 import { RepoLanguage } from "@/types/repo_languages";
 
-import FadeInSection from "./fade_in_section";
+import FadeInSection from "../molecules/fade_in_section";
+
 import styles from "./languages.module.scss";
 
 type LanguagesProps = {

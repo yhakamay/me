@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { BsInstagram, BsLinkedin, BsTwitter } from "react-icons/bs";
 
+import FadeInSection from "../molecules/fade_in_section";
+
 import styles from "./contacts.module.scss";
-import FadeInSection from "./fade_in_section";
 
 export default function Contacts() {
   return (

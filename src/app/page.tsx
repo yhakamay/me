@@ -1,23 +1,21 @@
-import Contacts from "@/components/contacts";
-import Languages from "@/components/languages";
-import Profile from "@/components/profile";
-import Repos from "@/components/repos";
+import Contacts from "@/components/organisms/contacts";
+import Languages from "@/components/organisms/languages";
+import Profile from "@/components/organisms/profile";
+import Repos from "@/components/organisms/repos";
 import { Repo } from "@/types/repo";
 import { RepoLanguage } from "@/types/repo_languages";
-
-import styles from "./page.module.scss";
 
 export default async function Home() {
   const repos = (await getRepos()) satisfies Repo[];
   const languages = (await getAllLanguages(repos)) satisfies RepoLanguage[];
 
   return (
-    <main className={styles.main}>
+    <>
       <Profile />
       <Languages languages={languages} />
       <Repos repos={repos} />
       <Contacts />
-    </main>
+    </>
   );
 }
 

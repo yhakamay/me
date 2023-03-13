@@ -5,7 +5,8 @@ import Link from "next/link";
 
 import { Repo } from "@/types/repo";
 
-import FadeInSection from "./fade_in_section";
+import FadeInSection from "../molecules/fade_in_section";
+
 import styles from "./repos.module.scss";
 
 type ReposProps = {
