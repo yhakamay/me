@@ -4,12 +4,20 @@
     flex-direction: row;
     margin-top: 1rem;
 
+    .name {
+      margin-left: 0.8rem;
+      width: 6rem;
+      opacity: 0.8;
+      font-size: medium;
+    }
+
     .bar {
       margin-left: 1rem;
       height: 1rem;
       border: 1px solid;
       background-color: rgb(var(--foreground-rgb));
       border-radius: 0.2rem;
+      opacity: 0.9;
     }
   }
 }

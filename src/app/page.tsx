@@ -3,12 +3,13 @@ import Languages from "@/components/languages";
 import Profile from "@/components/profile";
 import Repos from "@/components/repos";
 import { Repo } from "@/types/repo";
+import { RepoLanguage } from "@/types/repo_languages";
 
 import styles from "./page.module.scss";
 
 export default async function Home() {
   const repos = (await getRepos()) satisfies Repo[];
-  const languages = (await getLanguages()) satisfies [string, number][];
+  const languages = (await getAllLanguages(repos)) satisfies RepoLanguage[];
 
   return (
     <main className={styles.main}>
@@ -37,17 +38,26 @@ async function getRepos() {
   return res.json();
 }
 
-async function getLanguages(): Promise<[string, number][]> {
-  const repos = (await getRepos()) satisfies Repo[];
+export async function getAllLanguages(repos: Repo[]): Promise<RepoLanguage[]> {
+  const promises = repos.map((repo) => fetch(repo.languages_url));
+  const responses = await Promise.all(promises);
 
-  const languages = new Map<string, number>();
+  const languageMaps = await Promise.all(
+    responses.map((response) => response.json())
+  );
 
-  for (const repo of repos) {
-    if (repo.language) {
-      const count = languages.get(repo.language) || 0;
-      languages.set(repo.language, count + 1);
+  const combinedMap = new Map();
+  for (const languageMap of languageMaps) {
+    for (const [language, bytes] of Object.entries(languageMap)) {
+      const existingBytes = combinedMap.get(language) ?? 0;
+      combinedMap.set(language, existingBytes + bytes);
     }
   }
 
-  return Array.from(languages.entries()).sort((a, b) => b[1] - a[1]);
+  const languages = Array.from(combinedMap.entries()).map(([name, count]) => ({
+    name,
+    count,
+  }));
+
+  return languages;
 }
