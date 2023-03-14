@@ -65,11 +65,9 @@ export default function Languages(props: LanguagesProps) {
                     stiffness: 30,
                     damping: 12,
                   }}
-                >
-                  <p className={styles.name}>{language.name}</p>
-                </motion.div>
+                ></motion.div>
+                <p className={styles.name}>{language.name}</p>
               </div>
-              <p className={styles.count}>{language.count}</p>
             </li>
           );
         })}

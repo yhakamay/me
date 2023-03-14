@@ -25,20 +25,12 @@
         background-color: rgb(var(--foreground-rgb));
         border-radius: 0.2rem;
         opacity: 0.9;
-
-        .name {
-          margin-left: 0.2rem;
-          opacity: 0.8;
-          font-size: small;
-          mix-blend-mode: difference;
-        }
       }
     }
 
-    .count {
-      text-align: end;
-      margin-left: 1rem;
-      opacity: 0.6;
+    .name {
+      margin-left: 0.6rem;
+      opacity: 0.8;
       font-size: small;
     }
   }

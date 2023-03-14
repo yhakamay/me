@@ -21,6 +21,9 @@ async function getRepos() {
   const res = await fetch(
     "https://api.github.com/users/yhakamay/repos?sort=updated&direction=desc",
     {
+      headers: {
+        Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}`,
+      },
       next: {
         revalidate: 60 * 60 * 24,
       },
@@ -37,6 +40,9 @@ async function getRepos() {
 async function getAllLanguages(repos: Repo[]): Promise<RepoLanguage[]> {
   const promises = repos.map((repo) =>
     fetch(repo.languages_url, {
+      headers: {
+        Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}`,
+      },
       next: {
         revalidate: 60 * 60 * 24,
       },
