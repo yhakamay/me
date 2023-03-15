@@ -25,7 +25,7 @@ export default function Profile() {
             delay: 0.2,
           }}
         >
-          <Image src="/yhakamay.png" width={60} height={60} alt={"yhakamay"} />
+          <Image src="/yhakamay.png" width={80} height={80} alt={"yhakamay"} />
         </motion.div>
         <p>
           yhakamay is ex-42 student, technical consultant, and Next.js lover.
