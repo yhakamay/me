@@ -2,7 +2,7 @@ import Languages from "@/components/organisms/languages";
 import Profile from "@/components/organisms/profile";
 import Repos from "@/components/organisms/repos";
 import { Repo } from "@/types/repo";
-import { RepoLanguage } from "@/types/repo_languages";
+import { RepoLanguage } from "@/types/repo_language";
 
 export default async function Home() {
   const repos = (await getRepos()) satisfies Repo[];

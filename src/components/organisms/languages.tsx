@@ -27,7 +27,7 @@ import {
   SiTypescript,
 } from "react-icons/si";
 
-import { RepoLanguage } from "@/types/repo_languages";
+import { RepoLanguage } from "@/types/repo_language";
 
 import FadeInSection from "../molecules/fade_in_section";
 
