@@ -1,13 +1,19 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import { useState } from "react";
 
 import FadeInSection from "../molecules/fade_in_section";
 
 import styles from "./profile.module.scss";
 
 export default function Profile() {
+  const [isOpen, setIsOpen] = useState(false);
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
       <FadeInSection className={styles.profile}>
@@ -15,15 +21,15 @@ export default function Profile() {
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          drag
-          dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
-          dragElastic={0.02}
           transition={{
             type: "spring",
-            duration: 2,
-            stiffness: 100,
+            duration: 0.5,
+            stiffness: 300,
+            damping: 20,
             delay: 0.2,
           }}
+          layoutId="profile-image"
+          onClick={handleClick}
         >
           <Image src="/yhakamay.png" width={80} height={80} alt={"yhakamay"} />
         </motion.div>
@@ -31,6 +37,68 @@ export default function Profile() {
           yhakamay is ex-42 student, technical consultant, and Next.js lover.
         </p>
       </FadeInSection>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            onClick={handleClick}
+            className={styles.overlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className={styles.card}
+              layoutId="profile-image"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className={styles.content}>
+                <Image
+                  src="/yhakamay.png"
+                  width={200}
+                  height={200}
+                  alt={"yhakamay"}
+                />
+                <h2>You found the secret area!</h2>
+                <p>Ta-da 🎉 You can now learn more about Yusuke.</p>
+                <div className={styles.favorites}>
+                  <p>🍜</p>
+                  <p>🏉</p>
+                  <p>🧑‍💻</p>
+                </div>
+                <ul className={styles.tips}>
+                  <li className={styles.tip}>
+                    <p>
+                      Yusuke raised in Fukuoka, which is famous for ramen. He
+                      eats ramen (at least) thrice a week.
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Yusuke has been played rugby for 10+ years. You can find
+                      his senior thesis about rugby history{" "}
+                      <a
+                        href="https://drive.google.com/file/d/108ZTK2lljWeGGqLGB2EajhLlJdpWMSLm/view?usp=sharing"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        here
+                      </a>
+                      .
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      Yusuke started to learn programming at 42 Tokyo. Piscine,
+                      the one-month exam was the most hardest thing in his life.
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
