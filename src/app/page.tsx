@@ -1,6 +1,7 @@
 import Languages from "@/components/organisms/languages";
 import Profile from "@/components/organisms/profile";
 import Repos from "@/components/organisms/repos";
+import { CommitData } from "@/types/commit";
 import { Repo } from "@/types/repo";
 import { RepoLanguage } from "@/types/repo_languages";
 
