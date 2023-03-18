@@ -23,10 +23,8 @@ export default function Profile() {
           viewport={{ once: true }}
           transition={{
             type: "spring",
-            duration: 0.5,
-            stiffness: 300,
-            damping: 20,
-            delay: 0.2,
+            stiffness: 260,
+            damping: 30,
           }}
           layoutId="profile-image"
           onClick={handleClick}
