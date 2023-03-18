@@ -1,25 +1,29 @@
+import Commits from "@/components/organisms/commits";
 import Languages from "@/components/organisms/languages";
 import Profile from "@/components/organisms/profile";
 import Repos from "@/components/organisms/repos";
+import { CommitData } from "@/types/commit";
 import { Repo } from "@/types/repo";
 import { RepoLanguage } from "@/types/repo_language";
 
 export default async function Home() {
-  const repos = (await getRepos()) satisfies Repo[];
-  const languages = (await getAllLanguages(repos)) satisfies RepoLanguage[];
+  const repos: Repo[] = await fetchRepos();
+  const languages: RepoLanguage[] = await fetchAllLanguages(repos);
+  const commits: CommitData[] = await fetchCommits(repos);
 
   return (
     <>
       <Profile />
       <Languages languages={languages} />
+      <Commits commits={commits} />
       <Repos repos={repos} />
     </>
   );
 }
 
-async function getRepos() {
+async function fetchRepos(): Promise<Repo[]> {
   const res = await fetch(
-    "https://api.github.com/users/yhakamay/repos?sort=updated&direction=desc",
+    "https://api.github.com/users/yhakamay/repos?sort=updated&direction=desc?per_page=100",
     {
       headers: {
         Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}`,
@@ -37,7 +41,7 @@ async function getRepos() {
   return res.json();
 }
 
-async function getAllLanguages(repos: Repo[]): Promise<RepoLanguage[]> {
+async function fetchAllLanguages(repos: Repo[]): Promise<RepoLanguage[]> {
   const promises = repos.map((repo) =>
     fetch(repo.languages_url, {
       headers: {
@@ -68,4 +72,25 @@ async function getAllLanguages(repos: Repo[]): Promise<RepoLanguage[]> {
   }));
 
   return languages;
+}
+
+async function fetchCommits(repos: Repo[]) {
+  const promises = repos.map((repo) =>
+    fetch(
+      `https://api.github.com/repos/yhakamay/${repo.name}/commits?per_page=100`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}`,
+        },
+        next: {
+          revalidate: 60 * 60 * 24,
+        },
+      }
+    ).then((response) => response.json())
+  );
+
+  const responses = await Promise.all(promises);
+  const commits: CommitData[] = responses[0];
+
+  return commits;
 }

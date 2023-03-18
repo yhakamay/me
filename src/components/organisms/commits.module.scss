@@ -1,0 +1,38 @@
+.commits {
+  .items {
+    -webkit-mask-image: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 1)),
+      to(rgba(0, 0, 0, 0.6))
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0.6)
+    );
+
+    .title {
+      min-width: 48px;
+    }
+
+    .message {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+
+    .date_time {
+      margin-top: 0.6rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+  }
+
+  .more {
+    margin-top: 0.6rem;
+    opacity: 0.9;
+  }
+}
