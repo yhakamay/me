@@ -1,3 +1,4 @@
+import Commits from "@/components/organisms/commits";
 import Languages from "@/components/organisms/languages";
 import Profile from "@/components/organisms/profile";
 import Repos from "@/components/organisms/repos";
