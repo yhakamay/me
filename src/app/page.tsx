@@ -7,8 +7,8 @@ import { Repo } from "@/types/repo";
 import { RepoLanguage } from "@/types/repo_languages";
 
 export default async function Home() {
-  const repos: Repo[] = await getRepos();
-  const languages: RepoLanguage[] = await getAllLanguages(repos);
+  const repos: Repo[] = await fetchRepos();
+  const languages: RepoLanguage[] = await fetchAllLanguages(repos);
   const commits: CommitData[] = await fetchCommits(repos);
 
   return (
@@ -21,7 +21,7 @@ export default async function Home() {
   );
 }
 
-async function getRepos(): Promise<Repo[]> {
+async function fetchRepos(): Promise<Repo[]> {
   const res = await fetch(
     "https://api.github.com/users/yhakamay/repos?sort=updated&direction=desc?per_page=100",
     {
@@ -41,7 +41,7 @@ async function getRepos(): Promise<Repo[]> {
   return res.json();
 }
 
-async function getAllLanguages(repos: Repo[]): Promise<RepoLanguage[]> {
+async function fetchAllLanguages(repos: Repo[]): Promise<RepoLanguage[]> {
   const promises = repos.map((repo) =>
     fetch(repo.languages_url, {
       headers: {
