@@ -69,3 +69,24 @@ async function getAllLanguages(repos: Repo[]): Promise<RepoLanguage[]> {
 
   return languages;
 }
+
+async function fetchCommits(repos: Repo[]) {
+  const promises = repos.map((repo) =>
+    fetch(
+      `https://api.github.com/repos/yhakamay/${repo.name}/commits?per_page=100`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}`,
+        },
+        next: {
+          revalidate: 60 * 60 * 24,
+        },
+      }
+    ).then((response) => response.json())
+  );
+
+  const responses = await Promise.all(promises);
+  const commits: CommitData[] = responses[0];
+
+  return commits;
+}
