@@ -32,10 +32,10 @@ export default function Profile() {
           <Image src="/yhakamay.png" width={80} height={80} alt={"yhakamay"} />
         </motion.div>
         <p>
-          yhakamay, an ex-42 Tokyo, is a technical consultant and an enthusiast
-          of Next.js. Raised in Fukuoka and spent two years of childhood in
-          Shanghai. Currently resides in Tokyo and works for Adobe as an AEM
-          Technical Consultant.
+          yhakamay, an ex-42 Tokyo student, is a technical consultant and an
+          enthusiast of Next.js. Raised in Fukuoka and spent two years of
+          childhood in Shanghai. Currently resides in Tokyo and works for Adobe
+          as an AEM Technical Consultant.
         </p>
       </FadeInSection>
 
