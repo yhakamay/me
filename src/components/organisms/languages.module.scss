@@ -22,7 +22,7 @@
 
       .bar {
         border: 1px solid;
-        background-color: rgb(var(--foreground-rgb));
+        background-color: var(--foreground-color);
         border-radius: 0.2rem;
         opacity: 0.9;
       }
