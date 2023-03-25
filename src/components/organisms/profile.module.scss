@@ -23,6 +23,11 @@
       var(--universe-end-color)
     );
 
+    @media (max-width: 600px) {
+      width: 80px;
+      height: 80px;
+    }
+
     img {
       border-radius: 16px;
       width: 90%;
@@ -62,6 +67,10 @@
   flex-direction: column;
   align-items: center;
 
+  @media (max-width: 600px) {
+    padding: 20px;
+  }
+
   .content {
     width: 100%;
     max-width: 40rem;
@@ -76,6 +85,11 @@
       height: 140px;
       border-radius: 20%;
       align-self: center;
+
+      @media (max-width: 600px) {
+        width: 80px;
+        height: 80px;
+      }
     }
 
     h2 {
@@ -104,6 +118,10 @@
       p {
         font-size: 6rem;
         text-align: center;
+
+        @media (max-width: 600px) {
+          font-size: 4rem;
+        }
       }
     }
 
@@ -113,40 +131,6 @@
 
       a {
         text-decoration: underline;
-      }
-    }
-  }
-}
-
-@media (max-width: 600px) {
-  .profile {
-    img {
-      width: 80px;
-      height: 80px;
-    }
-  }
-
-  .card {
-    background: linear-gradient(135deg, #5951ed, #656566);
-    border-radius: 20px;
-    padding: 30px;
-    color: #fff;
-    width: 80%;
-    height: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    .content {
-      img {
-        width: 80px;
-        height: 80px;
-      }
-
-      .favorites {
-        p {
-          font-size: 4rem;
-        }
       }
     }
   }
