@@ -29,7 +29,14 @@ export default function Profile() {
           layoutId="profile-image"
           onClick={handleClick}
         >
-          <Image src="/yhakamay.png" width={80} height={80} alt={"yhakamay"} />
+          <div className={styles.avatar}>
+            <Image
+              src="/yhakamay.png"
+              width={80}
+              height={80}
+              alt={"yhakamay"}
+            />
+          </div>
         </motion.div>
         <p>
           yhakamay, an ex-42 Tokyo student, is a technical consultant and an
