@@ -7,6 +7,24 @@
   max-width: 100%;
   margin-bottom: 2rem;
 
+  .logo {
+    display: flex;
+    flex-direction: row;
+    gap: 0.8rem;
+
+    h1 {
+      font-size: 1.2rem;
+      background: linear-gradient(
+        90deg,
+        var(--universe-start-color) 0%,
+        var(--universe-end-color) 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+
   .icon {
     width: 1.2rem;
     height: 1.2rem;
