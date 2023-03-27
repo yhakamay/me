@@ -21,14 +21,6 @@ export default function Commits(props: CommitsProps) {
       <h3>Commits</h3>
       <motion.ul className={styles.items}>
         {commits.slice(0, 10).map((commit: CommitData, index) => {
-          const formatter = new Intl.DateTimeFormat("en", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric",
-          });
-
           return (
             <motion.li
               key={commit.sha}
@@ -58,7 +50,7 @@ export default function Commits(props: CommitsProps) {
                 )}
                 {commit.commit.author.date && (
                   <p className={styles.date_time}>
-                    {formatter.format(new Date(commit.commit.author.date))}
+                    {commit.commit.author.date}
                   </p>
                 )}
               </Link>

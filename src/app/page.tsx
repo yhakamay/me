@@ -92,5 +92,18 @@ async function fetchCommits(repos: Repo[]) {
   const responses = await Promise.all(promises);
   const commits: CommitData[] = responses[0];
 
+  commits.forEach((commit) => {
+    const formatter = new Intl.DateTimeFormat("en", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    });
+    commit.commit.author.date = formatter.format(
+      new Date(commit.commit.author.date)
+    );
+  });
+
   return commits;
 }
