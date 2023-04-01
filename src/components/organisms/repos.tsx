@@ -19,7 +19,7 @@ export default function Repos(props: ReposProps) {
 
   return (
     <FadeInSection className={styles.repos}>
-      <h3>Repositories</h3>
+      <h2>Repositories</h2>
       <motion.ul className={styles.items}>
         {activeRepos.slice(0, 10).map((repo: Repo, index) => (
           <motion.li

@@ -45,7 +45,7 @@ export default function Languages(props: LanguagesProps) {
 
   return (
     <FadeInSection className={styles.languages}>
-      <h3>Languages</h3>
+      <h2>Languages</h2>
       <ul>
         {topTenLanguages.map((language, index) => {
           const { name, count } = language;

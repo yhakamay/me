@@ -18,7 +18,7 @@ export default function Commits(props: CommitsProps) {
 
   return (
     <FadeInSection className={styles.commits}>
-      <h3>Commits</h3>
+      <h2>Commits</h2>
       <motion.ul className={styles.items}>
         {commits.slice(0, 10).map((commit: CommitData, index) => {
           return (
