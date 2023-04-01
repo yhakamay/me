@@ -12,7 +12,7 @@ export default function SecretCard() {
     >
       <div className={styles.content}>
         <Image src="/yhakamay.png" width={200} height={200} alt={"yhakamay"} />
-        <h2>You found the secret area!</h2>
+        <h2 className={styles.title}>You found the secret area!</h2>
         <p>Ta-da 🎉 You can now learn more about Yusuke.</p>
         <div className={styles.favorites}>
           <p>🍜</p>
