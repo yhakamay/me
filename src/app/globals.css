@@ -57,7 +57,7 @@ a {
   text-decoration: none;
 }
 
-h3 {
+h2 {
   background: linear-gradient(
       90deg,
       var(--universe-start-color) 0%,
