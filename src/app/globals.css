@@ -1,17 +1,17 @@
 :root {
   --max-width: 800px;
-  --foreground-color: rgb(0, 0, 0);
-  --background-start-color: rgb(214, 219, 220);
-  --background-end-color: rgb(255, 255, 255);
-  --universe-start-color: rgb(0, 0, 0);
-  --universe-end-color: rgb(0, 0, 0);
+  --foreground-color: rgb(20, 20, 20);
+  --background-start-color: rgb(209, 242, 251);
+  --background-end-color: rgb(239, 239, 239);
+  --universe-start-color: rgb(20, 20, 20);
+  --universe-end-color: rgb(20, 20, 20);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-color: rgb(255, 255, 255);
-    --background-start-color: rgb(0, 0, 0);
-    --background-end-color: rgb(0, 0, 0);
+    --foreground-color: rgb(237, 237, 237);
+    --background-start-color: rgb(5, 3, 15);
+    --background-end-color: rgb(2, 2, 2);
     --universe-start-color: rgb(157, 93, 242);
     --universe-end-color: rgb(107, 171, 188);
   }
