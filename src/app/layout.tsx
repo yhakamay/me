@@ -18,14 +18,6 @@ export const metadata = {
       "yhakamay is ex-42 student, technical consultant, and Next.js lover.",
     siteName: "yhakamay",
     url: "https://yhakamay.me",
-    images: [
-      {
-        url: "https://yhakamay.me/og.png",
-        width: 512,
-        height: 512,
-        alt: "yhakamay",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -33,7 +25,6 @@ export const metadata = {
     description:
       "yhakamay is ex-42 student, technical consultant, and Next.js lover.",
     creator: "@yhakamay",
-    images: ["https://yhakamay.me/og.png"],
   },
 };
 
