@@ -26,6 +26,6 @@
   "devDependencies": {
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-unused-imports": "^2.0.0",
-    "sass": "^1.60.0"
+    "sass": "^1.61.0"
   }
 }
