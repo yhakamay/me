@@ -7,23 +7,24 @@ import Main from "@/components/atoms/main";
 import Footer from "@/components/organisms/footer";
 import Header from "@/components/organisms/header";
 
+const title = "yhakamay";
+const description =
+  "yhakamay is ex-42 student, technical consultant, and Next.js lover.";
+
 export const metadata = {
-  title: "yhakamay",
-  description:
-    "yhakamay is ex-42 student, technical consultant, and Next.js lover.",
+  title: title,
+  description: description,
   openGraph: {
-    title: "yhakamay",
+    title: title,
     type: "website",
-    description:
-      "yhakamay is ex-42 student, technical consultant, and Next.js lover.",
-    siteName: "yhakamay",
+    description: description,
+    siteName: title,
     url: "https://yhakamay.me",
   },
   twitter: {
     card: "summary_large_image",
-    title: "yhakamay",
-    description:
-      "yhakamay is ex-42 student, technical consultant, and Next.js lover.",
+    title: title,
+    description: description,
     creator: "@yhakamay",
   },
 };
