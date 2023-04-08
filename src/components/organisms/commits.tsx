@@ -46,7 +46,11 @@ export default function Commits(props: CommitsProps) {
                 rel={"noopener noreferrer"}
               >
                 {commit.commit.message && (
-                  <p className={styles.message}>{commit.commit.message}</p>
+                  <p className={styles.message}>
+                    {commit.commit.message.length > 120
+                      ? commit.commit.message.slice(0, 120) + "..."
+                      : commit.commit.message}
+                  </p>
                 )}
                 {commit.commit.author.date && (
                   <p className={styles.date_time}>
