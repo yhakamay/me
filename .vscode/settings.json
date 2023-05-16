@@ -3,5 +3,8 @@
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
   }
 }
