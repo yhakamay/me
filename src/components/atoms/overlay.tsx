@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
 
-import styles from "./overlay.module.scss";
-
 type OverlayProps = {
   children: React.ReactNode;
   onClick: () => void;
@@ -13,7 +11,7 @@ export default function Overlay(props: OverlayProps) {
   return (
     <motion.div
       onClick={onClick}
-      className={styles.overlay}
+      className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 flex justify-center items-center z-100"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
