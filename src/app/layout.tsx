@@ -40,7 +40,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body className={`${inter.className} bg-white dark:bg-slate-950`}>
+      <body
+        className={`${inter.className} bg-white dark:bg-gradient-to-b from-slate-950 from-50% via-slate-900 via-80% to-rose-950`}
+      >
         <Header />
         {children}
         <Footer />
