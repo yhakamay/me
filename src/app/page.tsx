@@ -139,7 +139,11 @@ export default async function Home() {
                   <div className="flex gap-x-4">
                     <div className="min-w-0 max-w-sm flex-auto">
                       <p className="text-sm font-semibold leading-6 text-gray-900">
-                        <Link href={repo.url}>
+                        <Link
+                          href={repo.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           <span className="absolute inset-x-0 -top-px bottom-0" />
                           {repo.name}
                         </Link>
