@@ -10,6 +10,8 @@ export default function Footer() {
               View source on{" "}
               <Link
                 href={"https://github.com/yhakamay/me"}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-gray-700 transition duration-150 ease-in-out"
               >
                 GitHub
