@@ -18,7 +18,7 @@ export default async function Home() {
               width={240}
               height={240}
               alt={"yhakamay"}
-              className="rounded-full h-24 w-auto"
+              className="rounded-full h-20 md:h-24 w-auto"
             />
             <h1 className="mt-2 text-3xl font-bold text-gray-900 dark:text-gray-300 md:text-4xl lg:text-5xl">
               Ex-42 student, technical consultant, and Next.js lover.
