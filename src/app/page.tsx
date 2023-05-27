@@ -140,7 +140,7 @@ export default async function Home() {
                     <div className="min-w-0 max-w-sm flex-auto">
                       <p className="text-sm font-semibold leading-6 text-gray-900">
                         <Link
-                          href={repo.url}
+                          href={repo.html_url}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
