@@ -139,10 +139,10 @@ export default async function Home() {
                   <div className="flex gap-x-4">
                     <div className="min-w-0 max-w-sm flex-auto">
                       <p className="text-sm font-semibold leading-6 text-gray-900">
-                        <a href={repo.url}>
+                        <Link href={repo.url}>
                           <span className="absolute inset-x-0 -top-px bottom-0" />
                           {repo.name}
-                        </a>
+                        </Link>
                       </p>
                       <p className="mt-1 flex text-xs leading-5 text-gray-500">
                         {repo.description?.substring(0, 200)}
