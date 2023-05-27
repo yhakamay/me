@@ -3,6 +3,8 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 
+import Header from "@/components/organisms/header";
+
 const title = "yhakamay";
 const description =
   "yhakamay is ex-42 student, technical consultant, and Next.js lover.";
@@ -38,7 +40,7 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body className={`${inter.className}`}>
-        {/*<Header />*/}
+        <Header />
         {children}
         {/*<Footer />*/}
         <Analytics />
