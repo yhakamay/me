@@ -1,6 +1,5 @@
 import "./globals.css";
 
-import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 
 import Footer from "@/components/organisms/footer";
@@ -42,7 +41,6 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}
         <Footer />
-        <Analytics />
       </body>
     </html>
   );
