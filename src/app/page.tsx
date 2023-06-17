@@ -19,6 +19,7 @@ export default async function Home() {
                 height={240}
                 alt={"yhakamay"}
                 className="mask mask-squircle h-20 md:h-24 w-auto shadow-sm shadow-black"
+                unoptimized={true}
               />
               <h1 className="mt-2 text-3xl font-bold">
                 Ex-42 student, technical consultant, and Next.js lover.
