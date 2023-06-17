@@ -3,8 +3,6 @@ import Link from "next/link";
 
 import { Repo } from "@/types/repo";
 
-export const runtime = "edge";
-
 export default async function Home() {
   const repos: Repo[] = await fetchRepos();
   const topRepos: Repo[] = await getTopRepos(repos, 7);
