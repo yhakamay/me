@@ -1,11 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
+import xml2js from "xml2js";
 
+import { Article } from "@/types/article";
 import { Repo } from "@/types/repo";
 
 export default async function Home() {
   const repos: Repo[] = await fetchRepos();
   const topRepos: Repo[] = await getTopRepos(repos, 7);
+  const articles: Article[] = await fetchArticles();
 
   return (
     <>
@@ -114,148 +117,156 @@ export default async function Home() {
 
         <section className="pt-16">
           <div className="mx-auto">
-            <div className="mx-auto">
-              <h2 className="text-center mt-2 text-2xl font-bold">Skills</h2>
-              <div className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-4 gap-y-6 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
-                <Image
-                  className="col-span-2 h-10 w-full object-contain lg:col-span-1 dark:hidden"
-                  src="/flutter.svg"
-                  alt="Flutter"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 h-10 w-full object-contain lg:col-span-1 hidden dark:block"
-                  src="/flutter-fff.svg"
-                  alt="Flutter"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 h-10 w-full object-contain lg:col-span-1 dark:hidden"
-                  src="/firebase.svg"
-                  alt="Firebase"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 h-10 w-full object-contain lg:col-span-1 hidden dark:block"
-                  src="/firebase-fff.svg"
-                  alt="Firebase"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 h-6 w-full object-contain lg:col-span-1 dark:hidden"
-                  src="/nextjs.svg"
-                  alt="Next.js"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 h-6 w-full object-contain lg:col-span-1 hidden dark:block"
-                  src="/nextjs-fff.svg"
-                  alt="Next.js"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 h-10 w-full object-contain sm:col-start-2 lg:col-span-1 dark:hidden"
-                  src="/graphql.svg"
-                  alt="GraphQL"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 h-10 w-full object-contain sm:col-start-2 lg:col-span-1 hidden dark:block"
-                  src="/graphql-fff.svg"
-                  alt="GraphQL"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 col-start-2 h-10 w-full object-contain sm:col-start-auto lg:col-span-1 dark:hidden"
-                  src="/tailwind.svg"
-                  alt="Tailwind CSS"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 col-start-2 h-10 w-full object-contain sm:col-start-auto lg:col-span-1 hidden dark:block"
-                  src="/tailwind-fff.svg"
-                  alt="Tailwind CSS"
-                  width={120}
-                  height={30}
-                />
-              </div>
+            <h2 className="text-center mt-2 text-2xl font-bold">Skills</h2>
+            <div className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-4 gap-y-6 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
+              <Image
+                className="col-span-2 h-10 w-full object-contain lg:col-span-1 dark:hidden"
+                src="/flutter.svg"
+                alt="Flutter"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 h-10 w-full object-contain lg:col-span-1 hidden dark:block"
+                src="/flutter-fff.svg"
+                alt="Flutter"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 h-10 w-full object-contain lg:col-span-1 dark:hidden"
+                src="/firebase.svg"
+                alt="Firebase"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 h-10 w-full object-contain lg:col-span-1 hidden dark:block"
+                src="/firebase-fff.svg"
+                alt="Firebase"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 h-6 w-full object-contain lg:col-span-1 dark:hidden"
+                src="/nextjs.svg"
+                alt="Next.js"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 h-6 w-full object-contain lg:col-span-1 hidden dark:block"
+                src="/nextjs-fff.svg"
+                alt="Next.js"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 h-10 w-full object-contain sm:col-start-2 lg:col-span-1 dark:hidden"
+                src="/graphql.svg"
+                alt="GraphQL"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 h-10 w-full object-contain sm:col-start-2 lg:col-span-1 hidden dark:block"
+                src="/graphql-fff.svg"
+                alt="GraphQL"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 col-start-2 h-10 w-full object-contain sm:col-start-auto lg:col-span-1 dark:hidden"
+                src="/tailwind.svg"
+                alt="Tailwind CSS"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 col-start-2 h-10 w-full object-contain sm:col-start-auto lg:col-span-1 hidden dark:block"
+                src="/tailwind-fff.svg"
+                alt="Tailwind CSS"
+                width={120}
+                height={30}
+              />
             </div>
           </div>
         </section>
 
         <section className="pt-16">
           <h2 className="text-center mt-2 text-2xl font-bold">Repositories</h2>
-          <div className="card glass mt-10">
-            <ul role="list" className="card-body">
-              {topRepos.map((repo) => (
+          <ul role="list" className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {topRepos.map((repo) => (
+              <li key={repo.id}>
                 <Link
-                  key={repo.url}
                   href={repo.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <li className="relative flex justify-between py-4 gap-2">
-                    <div className="flex">
-                      <div className="min-w-0 max-w-lg flex-auto">
-                        <p className="text-sm font-semibold leading-6">
-                          {repo.name}
-                        </p>
+                  <div className="card bg-base-100 shadow-md md:h-60">
+                    <div className="card-body">
+                      <h2 className="card-title line-clamp-1">{repo.name}</h2>
+                      <div className="md:h-20">
                         {repo.description ? (
-                          <p className="mt-1 flex text-xs leading-4 text-base-content/80 dark:text-neutral-content/80">
-                            {repo.description}
-                          </p>
+                          <p className="line-clamp-3">{repo.description}</p>
                         ) : (
-                          <p className="mt-1 flex text-xs leading-4 text-base-content/80 dark:text-neutral-content/80 italic">
-                            No description
-                          </p>
+                          <p className="italic">No description</p>
                         )}
                       </div>
-                    </div>
-                    <div className="flex items-center min-w-fit gap-x-4">
-                      <div className="hidden sm:flex sm:flex-col sm:items-end">
-                        {repo.language ? (
-                          <p className="text-xs leading-6 text-base-content/70 dark:text-neutral-content/text-base-content/70">
+                      <div className="card-actions justify-end md:h-6">
+                        {repo.language && (
+                          <div className="badge badge-outline">
                             {repo.language}
-                          </p>
-                        ) : (
-                          <p className="text-xs leading-6 text-base-content/70 dark:text-neutral-content/text-base-content/70 italic">
-                            N/A
-                          </p>
+                          </div>
                         )}
-                        <p className="mt-1 text-xs leading-5 text-base-content/70 dark:text-neutral-content/text-base-content/70">
-                          Updated at{" "}
-                          {new Date(repo.updated_at).toLocaleDateString()}
-                        </p>
                       </div>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="h-4 w-auto"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                        />
-                      </svg>
+                      <p className="mt-1 text-base-content/70 dark:text-neutral-content/70">
+                        {new Date(repo.updated_at).toLocaleDateString()}
+                      </p>
                     </div>
-                  </li>
+                  </div>
                 </Link>
-              ))}
-            </ul>
-          </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="pt-16">
+          <h2 className="text-center mt-2 text-2xl font-bold">Articles</h2>
+          <ul role="list" className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {articles.map(
+              (article) =>
+                article.title && (
+                  <li key={article.guid[0]}>
+                    <Link
+                      href={article.link[0]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div className="card bg-base-100 shadow-md md:h-52">
+                        <div className="card-body">
+                          <h2 className="card-title line-clamp-1">
+                            {article.title[0]}
+                          </h2>
+                          <div className="md:h-20">
+                            {article.description ? (
+                              <p className="line-clamp-3">
+                                {article.description[0]}
+                              </p>
+                            ) : (
+                              <p className="italic">No description</p>
+                            )}
+                          </div>
+                          <p className="mt-1 text-base-content/70 dark:text-neutral-content/70">
+                            {new Date(article.pubDate[0]).toLocaleDateString()}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+                  </li>
+                )
+            )}
+          </ul>
         </section>
       </main>
     </>
@@ -293,4 +304,25 @@ async function getTopRepos(repos: Repo[], count: number): Promise<Repo[]> {
   );
 
   return sortedRepos.slice(0, count);
+}
+
+async function fetchArticles(): Promise<Article[]> {
+  const res = await fetch("https://zenn.dev/yhakamay/feed", {
+    next: {
+      revalidate: 60 * 60 * 24,
+    },
+  });
+  const xml = await res.text();
+  const feed = await xml2js.parseStringPromise(xml);
+  const items = feed.rss.channel[0].item;
+
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+
+  items.forEach((item: Article) => {
+    console.log(item.enclosure);
+  });
+
+  return items;
 }
