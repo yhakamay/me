@@ -214,6 +214,12 @@ export default async function Home() {
                         )}
                       </div>
                       <div className="card-actions justify-end md:h-6">
+                        {new Date(repo.updated_at) >
+                        new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) ? (
+                          <div className="badge badge-outline badge-accent">
+                            Recent
+                          </div>
+                        ) : null}
                         {repo.language && (
                           <div className="badge badge-outline">
                             {repo.language}
