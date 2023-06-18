@@ -114,80 +114,78 @@ export default async function Home() {
 
         <section className="pt-16">
           <div className="mx-auto">
-            <div className="mx-auto">
-              <h2 className="text-center mt-2 text-2xl font-bold">Skills</h2>
-              <div className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-4 gap-y-6 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
-                <Image
-                  className="col-span-2 h-10 w-full object-contain lg:col-span-1 dark:hidden"
-                  src="/flutter.svg"
-                  alt="Flutter"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 h-10 w-full object-contain lg:col-span-1 hidden dark:block"
-                  src="/flutter-fff.svg"
-                  alt="Flutter"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 h-10 w-full object-contain lg:col-span-1 dark:hidden"
-                  src="/firebase.svg"
-                  alt="Firebase"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 h-10 w-full object-contain lg:col-span-1 hidden dark:block"
-                  src="/firebase-fff.svg"
-                  alt="Firebase"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 h-6 w-full object-contain lg:col-span-1 dark:hidden"
-                  src="/nextjs.svg"
-                  alt="Next.js"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 h-6 w-full object-contain lg:col-span-1 hidden dark:block"
-                  src="/nextjs-fff.svg"
-                  alt="Next.js"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 h-10 w-full object-contain sm:col-start-2 lg:col-span-1 dark:hidden"
-                  src="/graphql.svg"
-                  alt="GraphQL"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 h-10 w-full object-contain sm:col-start-2 lg:col-span-1 hidden dark:block"
-                  src="/graphql-fff.svg"
-                  alt="GraphQL"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 col-start-2 h-10 w-full object-contain sm:col-start-auto lg:col-span-1 dark:hidden"
-                  src="/tailwind.svg"
-                  alt="Tailwind CSS"
-                  width={120}
-                  height={30}
-                />
-                <Image
-                  className="col-span-2 col-start-2 h-10 w-full object-contain sm:col-start-auto lg:col-span-1 hidden dark:block"
-                  src="/tailwind-fff.svg"
-                  alt="Tailwind CSS"
-                  width={120}
-                  height={30}
-                />
-              </div>
+            <h2 className="text-center mt-2 text-2xl font-bold">Skills</h2>
+            <div className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-4 gap-y-6 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
+              <Image
+                className="col-span-2 h-10 w-full object-contain lg:col-span-1 dark:hidden"
+                src="/flutter.svg"
+                alt="Flutter"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 h-10 w-full object-contain lg:col-span-1 hidden dark:block"
+                src="/flutter-fff.svg"
+                alt="Flutter"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 h-10 w-full object-contain lg:col-span-1 dark:hidden"
+                src="/firebase.svg"
+                alt="Firebase"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 h-10 w-full object-contain lg:col-span-1 hidden dark:block"
+                src="/firebase-fff.svg"
+                alt="Firebase"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 h-6 w-full object-contain lg:col-span-1 dark:hidden"
+                src="/nextjs.svg"
+                alt="Next.js"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 h-6 w-full object-contain lg:col-span-1 hidden dark:block"
+                src="/nextjs-fff.svg"
+                alt="Next.js"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 h-10 w-full object-contain sm:col-start-2 lg:col-span-1 dark:hidden"
+                src="/graphql.svg"
+                alt="GraphQL"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 h-10 w-full object-contain sm:col-start-2 lg:col-span-1 hidden dark:block"
+                src="/graphql-fff.svg"
+                alt="GraphQL"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 col-start-2 h-10 w-full object-contain sm:col-start-auto lg:col-span-1 dark:hidden"
+                src="/tailwind.svg"
+                alt="Tailwind CSS"
+                width={120}
+                height={30}
+              />
+              <Image
+                className="col-span-2 col-start-2 h-10 w-full object-contain sm:col-start-auto lg:col-span-1 hidden dark:block"
+                src="/tailwind-fff.svg"
+                alt="Tailwind CSS"
+                width={120}
+                height={30}
+              />
             </div>
           </div>
         </section>
