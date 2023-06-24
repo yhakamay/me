@@ -1,0 +1,21 @@
+name: Lint
+
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  eslint:
+    name: Lint with ESLint
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install next
+        run: npm i next@latest
+      - name: Lint with ESLint
+        run: npm run lint
