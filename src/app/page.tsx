@@ -17,7 +17,7 @@ export default async function Home() {
           <div className="hero min-h-screen">
             <div className="hero-content flex-col lg:flex-row">
               <Image
-                src={"/yhakamay.png"}
+                src={"/yhakamay.webp"}
                 width={96}
                 height={96}
                 alt={"yhakamay"}
