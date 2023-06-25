@@ -18,8 +18,8 @@ export default async function Home() {
             <div className="hero-content flex-col lg:flex-row">
               <Image
                 src={"/yhakamay.png"}
-                width={240}
-                height={240}
+                width={96}
+                height={96}
                 alt={"yhakamay"}
                 className="mask mask-squircle h-20 md:h-24 w-auto shadow-sm shadow-black"
                 unoptimized={true}
