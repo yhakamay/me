@@ -216,7 +216,7 @@ export default async function Home() {
                       <div className="card-actions justify-end md:h-6">
                         {new Date(repo.updated_at) >
                         new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) ? (
-                          <div className="badge badge-outline badge-accent">
+                          <div className="badge badge-outline badge-primary">
                             Recent
                           </div>
                         ) : null}
