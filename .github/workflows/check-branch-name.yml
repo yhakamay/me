@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+    types: [opened]
 
 jobs:
   check-branch-name:
@@ -15,24 +16,39 @@ jobs:
           PR_BRANCH=${{ github.head_ref }}
           if [[ $PR_BRANCH == "develop" || $PR_BRANCH == hotfix/* ]]; then
             echo "Branch name $PR_BRANCH is valid."
-            echo "::set-output name=STATUS::success"
+            echo "STATUS=success" >> "$GITHUB_OUTPUT"
           else
-            echo "Error: Invalid branch name $PR_BRANCH. PRs to 'main' should come from 'develop' or 'hotfix/*' branches."
-            echo "::set-output name=STATUS::failure"
-            echo "::set-output name=MESSAGE::Invalid branch name $PR_BRANCH. PRs to 'main' should come from 'develop' or 'hotfix/*' branches."
+            echo "Error: Invalid branch name $PR_BRANCH. PRs to `main` should come from `develop` or `hotfix/*` branches."
+            echo "STATUS=failure" >> "$GITHUB_OUTPUT"
+            echo "MESSAGE=Invalid branch name **$PR_BRANCH**. PRs to main should come from **develop** or **hotfix/*** branches." >> "$GITHUB_OUTPUT"
           fi
+      - name: Test output
+        run: |
+          echo "Status: ${{ steps.branch_check.outputs.STATUS }}"
       - name: Create comment
         if: steps.branch_check.outputs.STATUS == 'failure'
         uses: actions/github-script@v6
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const issue_number = context.payload.pull_request.number;
-            const pr_creator = context.payload.pull_request.user.login;
-            const message = `@${pr_creator}, ${{ steps.branch_check.outputs.MESSAGE }}`;
             github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: issue_number,
-              body: message
+              issue_number: context.issue.number,
+              body: `@${context.payload.pull_request.user.login}, ${{ steps.branch_check.outputs.MESSAGE }}`
             });
-            process.exit(1);
+      - name: Close pull request
+        if: steps.branch_check.outputs.STATUS == 'failure'
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              state: 'closed',
+            })
+      - name: Exit with failure
+        if: steps.branch_check.outputs.STATUS == 'failure'
+        run: exit 1
