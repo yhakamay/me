@@ -34,6 +34,7 @@ jobs:
               repo: context.repo.repo,
               issue_number: context.issue.number,
               body: `@${context.payload.pull_request.user.login}, Invalid branch name ``$PR_BRANCH``. PRs to ``main`` should come from ``develop`` or ``hotfix/*`` branches.`
+              body: `@${context.payload.pull_request.user.login}, `
             });
       - name: Exit with failure
         if: steps.branch_check.outputs.STATUS == 'failure'
