@@ -28,15 +28,15 @@ jobs:
         if: steps.branch_check.outputs.STATUS == 'failure'
         uses: actions/github-script@v6
         with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const issue_number = context.payload.pull_request.number;
-            const pr_creator = context.payload.pull_request.user.login;
-            const message = `@${pr_creator}, ${{ steps.branch_check.outputs.MESSAGE }}`;
+            const issue_number = ;
+            const pr_creator = ;
             github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: issue_number,
-              body: message
+              issue_number: context.issue.number,
+              body: `@${context.payload.pull_request.user.login}, ${{ steps.branch_check.outputs.MESSAGE }}`
             });
       - name: Exit with failure
         if: steps.branch_check.outputs.STATUS == 'failure'
