@@ -1,0 +1,38 @@
+name: Check Branch Name
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-branch-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check branch name
+        id: branch_check
+        run: |
+          PR_BRANCH=${{ github.head_ref }}
+          if [[ $PR_BRANCH == "develop" || $PR_BRANCH == hotfix/* ]]; then
+            echo "Branch name $PR_BRANCH is valid."
+            echo "::set-output name=STATUS::success"
+          else
+            echo "Error: Invalid branch name $PR_BRANCH. PRs to 'main' should come from 'develop' or 'hotfix/*' branches."
+            echo "::set-output name=STATUS::failure"
+            echo "::set-output name=MESSAGE::Invalid branch name $PR_BRANCH. PRs to 'main' should come from 'develop' or 'hotfix/*' branches."
+          fi
+      - name: Create comment
+        if: steps.branch_check.outputs.STATUS == 'failure'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issue_number = context.payload.pull_request.number;
+            const pr_creator = context.payload.pull_request.user.login;
+            const message = `@${pr_creator}, ${{ steps.branch_check.outputs.MESSAGE }}`;
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              body: message
+            });
+            process.exit(1);
