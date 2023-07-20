@@ -19,7 +19,6 @@ jobs:
           else
             echo "Error: Invalid branch name $PR_BRANCH. PRs to `main` should come from `develop` or `hotfix/*` branches."
             echo "STATUS=failure" >> "$GITHUB_OUTPUT"
-            echo "MESSAGE=Invalid branch name ``$PR_BRANCH``. PRs to ``main`` should come from ``develop`` or ``hotfix/*`` branches." >> "$GITHUB_OUTPUT"
           fi
       - name: Test output
         run: |
@@ -34,7 +33,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `@${context.payload.pull_request.user.login}, ${{ steps.branch_check.outputs.MESSAGE }}`
+              body: `@${context.payload.pull_request.user.login}, Invalid branch name ``$PR_BRANCH``. PRs to ``main`` should come from ``develop`` or ``hotfix/*`` branches.`
             });
       - name: Exit with failure
         if: steps.branch_check.outputs.STATUS == 'failure'
