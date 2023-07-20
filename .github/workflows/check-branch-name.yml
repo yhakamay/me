@@ -38,4 +38,6 @@ jobs:
               issue_number: issue_number,
               body: message
             });
-            process.exit(1);
+      - name: Exit with failure
+        if: steps.branch_check.outputs.STATUS == 'failure'
+        run: exit 1
