@@ -21,7 +21,7 @@
     "@types/react-dom": "^18.2.7",
     "@types/xml2js": "^0.4.11",
     "autoprefixer": "^10.4.14",
-    "daisyui": "^3.4.0",
+    "daisyui": "^3.5.0",
     "eslint": "^8.45.0",
     "eslint-config-next": "^13.4.12",
     "eslint-plugin-import": "^2.27.5",
