@@ -12,7 +12,7 @@ export default async function Home() {
 
   return (
     <>
-      <main className="mx-auto max-w-5xl px-4">
+      <main className="mx-auto max-w-5xl px-4 font-sans">
         <section>
           <div className="hero min-h-screen">
             <div className="hero-content flex-col lg:flex-row">
