@@ -12,7 +12,7 @@ export default async function Home() {
 
   return (
     <>
-      <main className="mx-auto max-w-5xl px-4">
+      <main className="mx-auto max-w-5xl px-4 font-sans">
         <section>
           <div className="hero min-h-screen">
             <div className="hero-content flex-col lg:flex-row">
@@ -203,7 +203,7 @@ export default async function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <div className="card bg-base-100 shadow-md md:h-60">
+                  <div className="card bg-base-100 shadow-sm md:h-60">
                     <div className="card-body">
                       <h2 className="card-title line-clamp-1">{repo.name}</h2>
                       <div className="md:h-20">
@@ -249,7 +249,7 @@ export default async function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <div className="card bg-base-100 shadow-md md:h-52">
+                      <div className="card bg-base-100 shadow-sm md:h-52">
                         <div className="card-body">
                           <h2 className="card-title line-clamp-1">
                             {article.title[0]}

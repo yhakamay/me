@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="footer footer-center my-8">
+    <footer className="footer footer-center my-8 font-sans">
       <div>
         <Link
           href={"https://github.com/yhakamay/me"}
