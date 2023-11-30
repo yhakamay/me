@@ -4,6 +4,11 @@ import xml2js from "xml2js";
 
 import { Article } from "@/types/article";
 import { Repo } from "@/types/repo";
+import "@material/web/chips/chip-set";
+import "@material/web/chips/filter-chip";
+import "@material/web/chips/input-chip";
+import "@material/web/chips/suggestion-chip";
+import "@material/web/chips/assist-chip";
 
 export default async function Home() {
   const repos: Repo[] = await fetchRepos();
@@ -114,6 +119,15 @@ export default async function Home() {
             </svg>
           </div>
         </section>
+
+        <div className="bg-red-400 w-full h-72">
+          <md-chip-set>
+            <md-assist-chip label="Assist"></md-assist-chip>
+            <md-filter-chip label="Filter"></md-filter-chip>
+            <md-input-chip label="Input"></md-input-chip>
+            <md-suggestion-chip label="Suggestion"></md-suggestion-chip>
+          </md-chip-set>
+        </div>
 
         <section className="pt-16">
           <div className="mx-auto">
