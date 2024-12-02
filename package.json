@@ -21,7 +21,7 @@
     "@types/xml2js": "^0.4.14",
     "autoprefixer": "^10.4.20",
     "daisyui": "^4.12.14",
-    "eslint": "^8.57.1",
+    "eslint": "^9.16.0",
     "eslint-config-next": "^14.2.15",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-unused-imports": "^3.2.0",
