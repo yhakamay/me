@@ -2,13 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import xml2js from "xml2js";
 
-import { Article } from "@/types/article";
-import { Repo } from "@/types/repo";
+import ArticleData from "@/types/article";
+import RepoData from "@/types/repo";
 
 export default async function Home() {
-  const repos: Repo[] = await fetchRepos();
-  const topRepos: Repo[] = await getTopRepos(repos, 7);
-  const articles: Article[] = await fetchArticles();
+  const repos: RepoData[] = await fetchRepos();
+  const topRepos: RepoData[] = await getTopRepos(repos, 7);
+  const articles: ArticleData[] = await fetchArticles();
 
   return (
     <>
@@ -243,7 +243,7 @@ export default async function Home() {
             {articles.map(
               (article) =>
                 article.title && (
-                  <li key={article.guid[0]}>
+                  <li key={article.guid[0]._}>
                     <Link
                       href={article.link[0]}
                       target="_blank"
@@ -279,7 +279,7 @@ export default async function Home() {
   );
 }
 
-async function fetchRepos(): Promise<Repo[]> {
+async function fetchRepos(): Promise<RepoData[]> {
   const res = await fetch(
     "https://api.github.com/users/yhakamay/repos?sort=updated&direction=desc?per_page=100",
     {
@@ -299,7 +299,10 @@ async function fetchRepos(): Promise<Repo[]> {
   return res.json();
 }
 
-async function getTopRepos(repos: Repo[], count: number): Promise<Repo[]> {
+async function getTopRepos(
+  repos: RepoData[],
+  count: number
+): Promise<RepoData[]> {
   // pop archived repos
   const activeRepos = repos.filter((repo) => !repo.archived);
 
@@ -312,7 +315,7 @@ async function getTopRepos(repos: Repo[], count: number): Promise<Repo[]> {
   return sortedRepos.slice(0, count);
 }
 
-async function fetchArticles(): Promise<Article[]> {
+async function fetchArticles(): Promise<ArticleData[]> {
   const res = await fetch("https://zenn.dev/yhakamay/feed", {
     next: {
       revalidate: 60 * 60 * 24,
@@ -326,8 +329,8 @@ async function fetchArticles(): Promise<Article[]> {
     throw new Error(res.statusText);
   }
 
-  items.forEach((item: Article) => {
-    console.log(item.enclosure);
+  items.forEach((item: ArticleData) => {
+    console.log(item);
   });
 
   return items;
