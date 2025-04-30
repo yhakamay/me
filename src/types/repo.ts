@@ -1,4 +1,4 @@
-export type Repo = {
+interface RepoData {
   id: number;
   node_id: string;
   name: string;
@@ -78,9 +78,9 @@ export type Repo = {
   open_issues: number;
   watchers: number;
   default_branch: string;
-};
+}
 
-type Owner = {
+interface Owner {
   login: string;
   id: number;
   node_id: string;
@@ -99,4 +99,6 @@ type Owner = {
   received_events_url: string;
   type: string;
   site_admin: boolean;
-};
+}
+
+export default RepoData;

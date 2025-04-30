@@ -1,13 +1,26 @@
-export type Article = {
-  title: string;
-  description: string;
-  link: string;
-  guid: string;
-  pubDate: string;
-  enclosure: {
+interface Guid {
+  _: string;
+  $: {
+    isPermaLink: string;
+  };
+}
+
+interface Enclosure {
+  $: {
     url: string;
-    length: number;
+    length: string;
     type: string;
   };
-  creator: string;
-};
+}
+
+interface ArticleData {
+  title: string[];
+  description: string[];
+  link: string[];
+  guid: Guid[];
+  pubDate: string[];
+  enclosure: Enclosure[];
+  "dc:creator": string[];
+}
+
+export default ArticleData;
