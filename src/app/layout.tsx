@@ -1,8 +1,13 @@
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
 import Footer from "@/components/organisms/footer";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 const title = "yhakamay";
 const description =
@@ -34,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className={inter.variable}>
         {children}
         <Footer />
       </body>
