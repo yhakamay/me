@@ -21,7 +21,7 @@ export default async function Home() {
                 width={96}
                 height={96}
                 alt={"yhakamay"}
-                className="mask mask-squircle h-20 md:h-24 w-auto shadow-sm shadow-black"
+                className="mask mask-squircle h-20 md:h-24 w-auto shadow-soft-lg"
                 unoptimized={true}
               />
               <h1 className="mt-2 text-3xl font-bold">
@@ -39,6 +39,7 @@ export default async function Home() {
                     href="https://github.com/yhakamay"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="link-modern focus-ring"
                   >
                     <Image
                       src={"/github.svg"}
@@ -59,6 +60,7 @@ export default async function Home() {
                     href="https://twitter.com/yhakamay"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="link-modern focus-ring"
                   >
                     <Image
                       src={"/twitter.svg"}
@@ -79,6 +81,7 @@ export default async function Home() {
                     href="https://www.instagram.com/yhakamay/"
                     target="_blank"
                     rel="noopener noreferrer"
+                    className="link-modern focus-ring"
                   >
                     <Image
                       src={"/instagram.svg"}
@@ -202,8 +205,9 @@ export default async function Home() {
                   href={repo.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="focus-ring rounded-3xl block"
                 >
-                  <div className="card bg-base-100 shadow-sm md:h-60">
+                  <div className="card bg-base-100 card-modern md:h-60">
                     <div className="card-body">
                       <h2 className="card-title line-clamp-1">{repo.name}</h2>
                       <div className="md:h-20">
@@ -216,12 +220,12 @@ export default async function Home() {
                       <div className="card-actions justify-end md:h-6">
                         {new Date(repo.updated_at) >
                         new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) ? (
-                          <div className="badge badge-outline badge-primary">
+                          <div className="badge badge-modern badge-primary">
                             Recent
                           </div>
                         ) : null}
                         {repo.language && (
-                          <div className="badge badge-outline">
+                          <div className="badge badge-modern badge-outline">
                             {repo.language}
                           </div>
                         )}
@@ -248,8 +252,9 @@ export default async function Home() {
                       href={article.link[0]}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="focus-ring rounded-3xl block"
                     >
-                      <div className="card bg-base-100 shadow-sm md:h-52">
+                      <div className="card bg-base-100 card-modern md:h-52">
                         <div className="card-body">
                           <h2 className="card-title line-clamp-1">
                             {article.title[0]}

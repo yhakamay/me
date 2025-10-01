@@ -8,7 +8,7 @@ export default function Footer() {
           href={"https://github.com/yhakamay/me"}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-gray-700 transition duration-150 ease-in-out"
+          className="hover:text-gray-700 dark:hover:text-gray-300 transition-smooth focus-ring rounded-xl inline-flex items-center gap-1 px-2 py-1"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +16,7 @@ export default function Footer() {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-5 h-5 inline-block align-middle mr-1"
+            className="w-5 h-5"
           >
             <path
               strokeLinecap="round"
