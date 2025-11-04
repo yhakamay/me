@@ -195,7 +195,7 @@ export default async function Home() {
 
         <section className="pt-16">
           <h2 className="text-center mt-2 text-2xl font-bold">Repositories</h2>
-          <ul role="list" className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <ul role="list" className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
             {topRepos.map((repo) => (
               <li key={repo.id}>
                 <Link
@@ -203,9 +203,9 @@ export default async function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <div className="card bg-base-100 shadow-sm md:h-60">
+                  <div className="card bg-base-100 rounded-2xl shadow-lg hover:shadow-2xl md:h-60 transition-all duration-300 ease-in-out hover:scale-[1.02] hover:border-primary/30 border border-transparent group">
                     <div className="card-body">
-                      <h2 className="card-title line-clamp-1">{repo.name}</h2>
+                      <h2 className="card-title line-clamp-1 group-hover:text-primary transition-colors duration-300">{repo.name}</h2>
                       <div className="md:h-20">
                         {repo.description ? (
                           <p className="line-clamp-3">{repo.description}</p>
@@ -239,7 +239,7 @@ export default async function Home() {
 
         <section className="pt-16">
           <h2 className="text-center mt-2 text-2xl font-bold">Articles</h2>
-          <ul role="list" className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <ul role="list" className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
             {articles.map(
               (article) =>
                 article.title && (
@@ -249,9 +249,9 @@ export default async function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <div className="card bg-base-100 shadow-sm md:h-52">
+                      <div className="card bg-base-100 rounded-2xl shadow-lg hover:shadow-2xl md:h-52 transition-all duration-300 ease-in-out hover:scale-[1.02] hover:border-primary/30 border border-transparent group">
                         <div className="card-body">
-                          <h2 className="card-title line-clamp-1">
+                          <h2 className="card-title line-clamp-1 group-hover:text-primary transition-colors duration-300">
                             {article.title[0]}
                           </h2>
                           <div className="md:h-20">
