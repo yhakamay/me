@@ -8,7 +8,7 @@ export default function Footer() {
           href={"https://github.com/yhakamay/me"}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-gray-700 transition duration-150 ease-in-out"
+          className="hover:text-primary transition duration-300 ease-in-out"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

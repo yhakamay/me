@@ -21,7 +21,7 @@ export default async function Home() {
                 width={96}
                 height={96}
                 alt={"yhakamay"}
-                className="mask mask-squircle h-20 md:h-24 w-auto shadow-sm shadow-black"
+                className="mask mask-squircle h-20 md:h-24 w-auto neomorph-light dark:neomorph-dark"
                 unoptimized={true}
               />
               <h1 className="mt-2 text-3xl font-bold">
@@ -203,7 +203,7 @@ export default async function Home() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <div className="card bg-base-100 shadow-sm md:h-60">
+                  <div className="card bg-base-100 neomorph-light dark:neomorph-dark md:h-60">
                     <div className="card-body">
                       <h2 className="card-title line-clamp-1">{repo.name}</h2>
                       <div className="md:h-20">
@@ -249,7 +249,7 @@ export default async function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <div className="card bg-base-100 shadow-sm md:h-52">
+                      <div className="card bg-base-100 neomorph-light dark:neomorph-dark md:h-52">
                         <div className="card-body">
                           <h2 className="card-title line-clamp-1">
                             {article.title[0]}
