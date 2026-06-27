@@ -161,31 +161,38 @@ export function CommandPalette() {
   let running = -1;
 
   return (
+    // The backdrop and the glass panel are kept as separate, top-level
+    // animated elements. Neither has an opacity-animating ancestor —
+    // otherwise Chromium withholds their backdrop-filter blur until the
+    // ancestor's opacity settles, making the blur appear with a delay.
     <AnimatePresence>
-      {open && (
-        <motion.div
-          className="fixed inset-0 z-[100] flex items-start justify-center px-4 pt-[12vh]"
+      {open && [
+        <motion.button
+          key="cmdk-backdrop"
+          type="button"
+          aria-label="Close command palette"
+          onClick={close}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.18 }}
+          className="fixed inset-0 z-[100] cursor-default bg-black/30 backdrop-blur-sm"
+        />,
+        <motion.div
+          key="cmdk-panel"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Command palette"
+          initial={{ opacity: 0, y: -12, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -8, scale: 0.98 }}
+          transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          // `position` + `top` are set inline: the `.glass` utility sets
+          // `position: relative`, which would otherwise override Tailwind's
+          // `fixed` and drop the panel to its static position.
+          style={{ position: "fixed", top: "12vh" }}
+          className="glass inset-x-4 z-[101] mx-auto w-auto max-w-xl overflow-hidden rounded-2xl shadow-2xl shadow-black/20"
         >
-          <button
-            type="button"
-            aria-label="Close command palette"
-            onClick={close}
-            className="absolute inset-0 cursor-default bg-black/30 backdrop-blur-sm"
-          />
-          <motion.div
-            role="dialog"
-            aria-modal="true"
-            aria-label="Command palette"
-            initial={{ opacity: 0, y: -12, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="glass relative w-full max-w-xl overflow-hidden rounded-2xl shadow-2xl shadow-black/20"
-          >
             <div className="flex items-center gap-3 border-b border-(--border) px-4">
               <span className="text-(--muted)" aria-hidden>
                 ⌘
@@ -265,9 +272,8 @@ export function CommandPalette() {
               </span>
               <span>{copied ? "Link copied ✓" : `${results.length} results`}</span>
             </div>
-          </motion.div>
-        </motion.div>
-      )}
+        </motion.div>,
+      ]}
     </AnimatePresence>
   );
 }
