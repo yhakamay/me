@@ -9,6 +9,7 @@ const description =
   "yhakamay is ex-42 student, technical consultant, and Next.js lover.";
 
 export const metadata = {
+  metadataBase: new URL("https://yhakamay.me"),
   title: title,
   description: description,
   openGraph: {
