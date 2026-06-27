@@ -60,6 +60,42 @@ export default function RootLayout({
         <div className="aurora" aria-hidden />
         <div className="noise" aria-hidden />
         {children}
+        {/* Refraction filter for .glass surfaces — warps the backdrop at
+            the edges. Turbulence → blur → displace; kept lightweight. */}
+        <svg
+          aria-hidden
+          width="0"
+          height="0"
+          className="pointer-events-none absolute"
+          style={{ position: "absolute", width: 0, height: 0 }}
+        >
+          <defs>
+            <filter
+              id="glass-distortion"
+              x="0%"
+              y="0%"
+              width="100%"
+              height="100%"
+              filterUnits="objectBoundingBox"
+            >
+              <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.008 0.008"
+                numOctaves={2}
+                seed={5}
+                result="turbulence"
+              />
+              <feGaussianBlur in="turbulence" stdDeviation="3" result="softMap" />
+              <feDisplacementMap
+                in="SourceGraphic"
+                in2="softMap"
+                scale={70}
+                xChannelSelector="R"
+                yChannelSelector="G"
+              />
+            </filter>
+          </defs>
+        </svg>
       </body>
     </html>
   );
