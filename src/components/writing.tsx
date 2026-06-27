@@ -1,15 +1,6 @@
 import { SpotlightCard } from "@/components/spotlight-card";
+import { formatDate } from "@/lib/format";
 import { Article } from "@/types/article";
-
-function formatDate(value: string) {
-  const d = new Date(value);
-  if (Number.isNaN(d.getTime())) return "";
-  return d.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-}
 
 export function Writing({ articles }: { articles: Article[] }) {
   if (articles.length === 0) {
@@ -25,7 +16,11 @@ export function Writing({ articles }: { articles: Article[] }) {
       {articles.map((article, i) => (
         <SpotlightCard key={article.guid} href={article.link} index={i}>
           <span className="font-mono text-xs text-(--muted)">
-            {formatDate(article.pubDate)}
+            {formatDate(article.pubDate, {
+              year: "numeric",
+              month: "short",
+              day: "numeric",
+            })}
           </span>
           <h3 className="mt-3 line-clamp-2 text-lg font-semibold tracking-tight transition-colors group-hover:text-(--color-accent)">
             {article.title}

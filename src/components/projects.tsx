@@ -1,12 +1,6 @@
 import { SpotlightCard } from "@/components/spotlight-card";
+import { formatDate } from "@/lib/format";
 import { Repo } from "@/types/repo";
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-  });
-}
 
 export function Projects({ repos }: { repos: Repo[] }) {
   if (repos.length === 0) {
