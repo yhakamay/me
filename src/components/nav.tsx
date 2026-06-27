@@ -51,7 +51,9 @@ export function Nav() {
           ))}
         </div>
         <Link
-          href={`mailto:${site.email}`}
+          href={site.contact}
+          target="_blank"
+          rel="noopener noreferrer"
           className="rounded-full bg-(--fg) px-4 py-1.5 text-sm font-medium text-(--bg) transition-opacity hover:opacity-85"
         >
           Contact

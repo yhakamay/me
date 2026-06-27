@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "fast-xml-parser": "^4.5.1",
+    "fast-xml-parser": "^5.7.0",
     "geist": "^1.7.2",
     "motion": "^12.0.0",
     "next": "^15.5.18",
