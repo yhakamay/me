@@ -50,14 +50,29 @@ export function Nav() {
             </Link>
           ))}
         </div>
-        <Link
-          href={site.contact}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="rounded-full bg-(--fg) px-4 py-1.5 text-sm font-medium text-(--bg) transition-opacity hover:opacity-85"
-        >
-          Contact
-        </Link>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() =>
+              window.dispatchEvent(new Event("open-command-palette"))
+            }
+            aria-label="Open command palette"
+            className="flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm text-(--muted) transition-colors hover:bg-(--border) hover:text-(--fg)"
+          >
+            <span className="hidden sm:inline">Search</span>
+            <kbd className="rounded border border-(--border) px-1.5 py-0.5 font-mono text-[10px]">
+              ⌘K
+            </kbd>
+          </button>
+          <Link
+            href={site.contact}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full bg-(--fg) px-4 py-1.5 text-sm font-medium text-(--bg) transition-opacity hover:opacity-85"
+          >
+            Contact
+          </Link>
+        </div>
       </nav>
     </motion.header>
   );
