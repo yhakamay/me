@@ -1,5 +1,6 @@
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
+import { Journey } from "@/components/journey";
 import { Nav } from "@/components/nav";
 import { Projects } from "@/components/projects";
 import { Reveal } from "@/components/reveal";
@@ -43,15 +44,19 @@ export default async function Home() {
           </Reveal>
         </Section>
 
-        <Section id="skills" index="02" title="Skills & Tools">
+        <Section id="journey" index="02" title="Places That Made Me">
+          <Journey />
+        </Section>
+
+        <Section id="skills" index="03" title="Skills & Tools">
           <Skills />
         </Section>
 
-        <Section id="work" index="03" title="Selected Work">
+        <Section id="work" index="04" title="Selected Work">
           <Projects repos={repos} />
         </Section>
 
-        <Section id="writing" index="04" title="Writing">
+        <Section id="writing" index="05" title="Writing">
           <Writing articles={articles} />
         </Section>
       </main>
