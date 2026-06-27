@@ -1,5 +1,6 @@
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
+import { NakanoMap } from "@/components/nakano-map";
 import { Nav } from "@/components/nav";
 import { Projects } from "@/components/projects";
 import { Reveal } from "@/components/reveal";
@@ -47,11 +48,22 @@ export default async function Home() {
           <Skills />
         </Section>
 
-        <Section id="work" index="03" title="Selected Work">
+        <Section id="nakano" index="03" title="Where I Live">
+          <Reveal>
+            <p className="mb-8 max-w-2xl text-lg leading-relaxed text-(--muted)">
+              An interactive, line-art 3D map of Nakano-ku — the Tokyo ward I
+              call home. Drag to orbit it; Nakano-shimbashi Station (中野新橋駅)
+              is marked in red.
+            </p>
+            <NakanoMap />
+          </Reveal>
+        </Section>
+
+        <Section id="work" index="04" title="Selected Work">
           <Projects repos={repos} />
         </Section>
 
-        <Section id="writing" index="04" title="Writing">
+        <Section id="writing" index="05" title="Writing">
           <Writing articles={articles} />
         </Section>
       </main>
