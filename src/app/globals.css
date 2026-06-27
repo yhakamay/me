@@ -24,8 +24,16 @@
   --bg: oklch(0.99 0.004 280);
   --fg: oklch(0.18 0.012 280);
   --muted: oklch(0.5 0.02 280);
-  --card: oklch(1 0 0 / 0.6);
+  --card: oklch(1 0 0 / 0.55);
   --border: oklch(0.5 0.02 280 / 0.16);
+
+  /* Liquid-glass surface cues (light) */
+  --glass-bright: 1.06;
+  --glass-sheen: oklch(1 0 0 / 0.5); /* diagonal highlight, top-left */
+  --glass-sheen-soft: oklch(1 0 0 / 0.08); /* faint catch, bottom-right */
+  --glass-edge: oklch(1 0 0 / 0.6); /* specular top hairline */
+  --glass-inner: oklch(1 0 0 / 0.05); /* inner rim */
+  --glass-shadow: oklch(0.2 0.03 280 / 0.18); /* soft float */
   color-scheme: light;
 }
 
@@ -34,8 +42,16 @@
     --bg: oklch(0.15 0.014 285);
     --fg: oklch(0.96 0.006 280);
     --muted: oklch(0.7 0.02 280);
-    --card: oklch(0.99 0.01 280 / 0.04);
+    --card: oklch(0.99 0.01 280 / 0.05);
     --border: oklch(0.99 0.01 280 / 0.1);
+
+    /* Liquid-glass surface cues (dark) */
+    --glass-bright: 1.12;
+    --glass-sheen: oklch(1 0 0 / 0.12);
+    --glass-sheen-soft: oklch(1 0 0 / 0.03);
+    --glass-edge: oklch(1 0 0 / 0.14);
+    --glass-inner: oklch(1 0 0 / 0.04);
+    --glass-shadow: oklch(0 0 0 / 0.45);
     color-scheme: dark;
   }
 }
@@ -86,10 +102,36 @@ body {
 }
 
 .glass {
-  background: var(--card);
-  backdrop-filter: blur(16px) saturate(150%);
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  /* Diagonal sheen layered over the translucent fill — reads as a
+     curved glass surface catching light from the top-left. */
+  background:
+    linear-gradient(
+      135deg,
+      var(--glass-sheen) 0%,
+      transparent 36%,
+      transparent 64%,
+      var(--glass-sheen-soft) 100%
+    ),
+    var(--card);
+  /* Single backdrop pass; brightness gives the frost an iOS-like glow. */
+  backdrop-filter: blur(20px) saturate(180%) brightness(var(--glass-bright));
+  -webkit-backdrop-filter: blur(20px) saturate(180%)
+    brightness(var(--glass-bright));
   border: 1px solid var(--border);
+  /* Specular top hairline + inner rim + soft float — all composited,
+     no extra blur passes. */
+  box-shadow:
+    inset 0 1px 0 0 var(--glass-edge),
+    inset 0 0 0 1px var(--glass-inner),
+    0 6px 20px -8px var(--glass-shadow);
+}
+
+/* Graceful fallback where backdrop-filter is unsupported. */
+@supports not ((backdrop-filter: blur(1px)) or
+  (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: var(--bg);
+  }
 }
 
 .gradient-text {
