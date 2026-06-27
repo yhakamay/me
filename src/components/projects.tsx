@@ -1,8 +1,6 @@
 import { SpotlightCard } from "@/components/spotlight-card";
 import { Repo } from "@/types/repo";
 
-const RECENT_MS = 14 * 24 * 60 * 60 * 1000;
-
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", {
     year: "numeric",
@@ -22,14 +20,13 @@ export function Projects({ repos }: { repos: Repo[] }) {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {repos.map((repo, i) => {
-        const recent = Date.now() - new Date(repo.updated_at).getTime() < RECENT_MS;
         return (
           <SpotlightCard key={repo.id} href={repo.html_url} index={i}>
             <div className="mb-3 flex items-center justify-between">
               <span className="font-mono text-xs text-(--muted)">
                 {formatDate(repo.updated_at)}
               </span>
-              {recent && (
+              {repo.recent && (
                 <span className="rounded-full bg-(--color-accent)/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-(--color-accent)">
                   Recent
                 </span>

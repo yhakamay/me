@@ -2,6 +2,7 @@ import { Repo } from "@/types/repo";
 
 const USERNAME = "yhakamay";
 const REVALIDATE = 60 * 60 * 6; // 6h
+const RECENT_MS = 14 * 24 * 60 * 60 * 1000; // 14 days
 
 /** Fetch the user's public repositories, sorted by most recently updated. */
 export async function getRepos(limit = 6): Promise<Repo[]> {
@@ -23,6 +24,7 @@ export async function getRepos(limit = 6): Promise<Repo[]> {
     }
 
     const repos: Repo[] = await res.json();
+    const now = Date.now();
 
     return repos
       .filter((repo) => !repo.fork && !repo.archived)
@@ -30,7 +32,11 @@ export async function getRepos(limit = 6): Promise<Repo[]> {
         (a, b) =>
           new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
       )
-      .slice(0, limit);
+      .slice(0, limit)
+      .map((repo) => ({
+        ...repo,
+        recent: now - new Date(repo.updated_at).getTime() < RECENT_MS,
+      }));
   } catch (err) {
     console.error("Failed to fetch repositories:", err);
     return [];

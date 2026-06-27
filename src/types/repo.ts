@@ -14,4 +14,6 @@ export type Repo = {
   created_at: string;
   updated_at: string;
   pushed_at: string;
+  /** Derived in the data layer: updated within the recency window. */
+  recent?: boolean;
 };
