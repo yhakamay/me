@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
 import { useState } from "react";
 
+import { EASE_OUT_SOFT } from "@/lib/motion";
 import { site } from "@/lib/site";
 
 const links = [
@@ -24,7 +25,7 @@ export function Nav() {
     <motion.header
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, ease: EASE_OUT_SOFT }}
       className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4"
     >
       <nav

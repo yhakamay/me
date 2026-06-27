@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
+import { EASE_OUT_SOFT } from "@/lib/motion";
 import { site } from "@/lib/site";
 
 /* ------------------------------------------------------------------ *
@@ -220,7 +221,7 @@ export function Journey() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.35, ease: EASE_OUT_SOFT }}
             className="text-balance text-sm leading-relaxed text-(--muted)"
           >
             {current.note}

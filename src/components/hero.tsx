@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 
+import { EASE_OUT_SOFT } from "@/lib/motion";
 import { site } from "@/lib/site";
 
 const container = {
@@ -18,7 +19,7 @@ const item = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { duration: 0.7, ease: EASE_OUT_SOFT },
   },
 };
 

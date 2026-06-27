@@ -6,7 +6,7 @@ repositories, and the latest [Zenn](https://zenn.dev/yhakamay) articles.
 
 ## Stack
 
-- **[Next.js 15](https://nextjs.org/)** (App Router, RSC, Turbopack)
+- **[Next.js 16](https://nextjs.org/)** (App Router, RSC, Turbopack)
 - **[React 19](https://react.dev/)**
 - **[Tailwind CSS v4](https://tailwindcss.com/)** — CSS-first config, no `tailwind.config.js`
 - **[Motion](https://motion.dev/)** for scroll & entrance animations

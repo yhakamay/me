@@ -1,9 +1,9 @@
 import { XMLParser } from "fast-xml-parser";
 
+import { REVALIDATE_SECONDS } from "@/lib/constants";
 import { Article } from "@/types/article";
 
 const FEED_URL = "https://zenn.dev/yhakamay/feed";
-const REVALIDATE = 60 * 60 * 6; // 6h
 
 type RawItem = {
   title?: string;
@@ -18,7 +18,9 @@ const parser = new XMLParser({ ignoreAttributes: false });
 /** Fetch and parse the latest Zenn articles from the RSS feed. */
 export async function getArticles(limit = 6): Promise<Article[]> {
   try {
-    const res = await fetch(FEED_URL, { next: { revalidate: REVALIDATE } });
+    const res = await fetch(FEED_URL, {
+      next: { revalidate: REVALIDATE_SECONDS },
+    });
 
     if (!res.ok) {
       throw new Error(`Zenn feed: ${res.status} ${res.statusText}`);

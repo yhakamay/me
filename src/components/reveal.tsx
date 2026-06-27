@@ -3,6 +3,8 @@
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
 
+import { EASE_OUT_SOFT } from "@/lib/motion";
+
 type RevealProps = {
   children: ReactNode;
   delay?: number;
@@ -18,7 +20,7 @@ export function Reveal({ children, delay = 0, y = 24, className }: RevealProps) 
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.7, delay, ease: EASE_OUT_SOFT }}
     >
       {children}
     </motion.div>

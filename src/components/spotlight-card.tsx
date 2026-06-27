@@ -4,6 +4,8 @@ import Link from "next/link";
 import { motion, useMotionTemplate, useMotionValue } from "motion/react";
 import type { MouseEvent, ReactNode } from "react";
 
+import { EASE_OUT_SOFT } from "@/lib/motion";
+
 type SpotlightCardProps = {
   href: string;
   index?: number;
@@ -28,7 +30,7 @@ export function SpotlightCard({ href, index = 0, children }: SpotlightCardProps)
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, delay: index * 0.08, ease: EASE_OUT_SOFT }}
     >
       <Link
         href={href}
