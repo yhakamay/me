@@ -24,8 +24,15 @@
   --bg: oklch(0.99 0.004 280);
   --fg: oklch(0.18 0.012 280);
   --muted: oklch(0.5 0.02 280);
-  --card: oklch(1 0 0 / 0.6);
+  --card: oklch(1 0 0 / 0.55);
   --border: oklch(0.5 0.02 280 / 0.16);
+
+  /* Liquid-glass layers (light) */
+  --glass-tint: oklch(1 0 0 / 0.2); /* frosted fill over the refraction */
+  --glass-shine-1: oklch(1 0 0 / 0.6); /* bright rim, top-left */
+  --glass-shine-2: oklch(1 0 0 / 0.5); /* softer rim, bottom-right */
+  --glass-shadow: oklch(0.2 0.03 280 / 0.18); /* soft float */
+  --glass-shadow-2: oklch(0.2 0.03 280 / 0.08);
   color-scheme: light;
 }
 
@@ -34,8 +41,15 @@
     --bg: oklch(0.15 0.014 285);
     --fg: oklch(0.96 0.006 280);
     --muted: oklch(0.7 0.02 280);
-    --card: oklch(0.99 0.01 280 / 0.04);
+    --card: oklch(0.99 0.01 280 / 0.05);
     --border: oklch(0.99 0.01 280 / 0.1);
+
+    /* Liquid-glass layers (dark) */
+    --glass-tint: oklch(1 0 0 / 0.06);
+    --glass-shine-1: oklch(1 0 0 / 0.22);
+    --glass-shine-2: oklch(1 0 0 / 0.14);
+    --glass-shadow: oklch(0 0 0 / 0.5);
+    --glass-shadow-2: oklch(0 0 0 / 0.28);
     color-scheme: dark;
   }
 }
@@ -85,11 +99,60 @@ body {
   text-wrap: balance;
 }
 
+/* ---- Liquid glass --------------------------------------------------
+ * iOS/macOS-style glass, built in layers so any element tagged `.glass`
+ * picks it up without markup changes:
+ *   ::before  refraction + tint — a blurred, displacement-warped sample
+ *             of the backdrop (the #glass-distortion SVG filter bends it
+ *             at the edges the way real glass does)
+ *   content   the element's own children
+ *   ::after   specular shine — bright inner rim, strong top-left
+ * The drop shadow lifts the panel off the page.
+ * ------------------------------------------------------------------ */
 .glass {
-  background: var(--card);
-  backdrop-filter: blur(16px) saturate(150%);
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   border: 1px solid var(--border);
+  box-shadow:
+    0 6px 16px -6px var(--glass-shadow),
+    0 2px 6px -2px var(--glass-shadow-2);
+}
+
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--glass-tint);
+  /* One backdrop pass; keep the blur light so the displacement warp
+     stays legible. The SVG filter does the refraction. */
+  backdrop-filter: blur(1px) saturate(160%);
+  -webkit-backdrop-filter: blur(1px) saturate(160%);
+  filter: url(#glass-distortion);
+}
+
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow:
+    inset 1.5px 1.5px 1px -1px var(--glass-shine-1),
+    inset -1px -1px 1px -0.5px var(--glass-shine-2),
+    inset 0 0 6px 0 var(--glass-shine-2);
+}
+
+/* Where backdrop-filter (or the SVG filter) is unavailable, the tint
+   still reads as a simple frosted panel. */
+@supports not ((backdrop-filter: blur(1px)) or
+  (-webkit-backdrop-filter: blur(1px))) {
+  .glass::before {
+    background: var(--card);
+  }
 }
 
 .gradient-text {
