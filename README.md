@@ -1,42 +1,56 @@
 # yhakamay.me
 
-Personal site of yhakamay, built with [Next.js](https://nextjs.org/) (App Router),
-Tailwind CSS + daisyUI, and deployed on Vercel. It renders a profile, a list of the
-most recently updated GitHub repositories, and the latest [Zenn](https://zenn.dev/yhakamay)
-articles.
+Personal site of **Yusuke Hakamaya** ([@yhakamay](https://github.com/yhakamay)).
+A fully rebuilt, motion-rich single page that renders a profile, live GitHub
+repositories, and the latest [Zenn](https://zenn.dev/yhakamay) articles.
 
-## Getting Started
+## Stack
 
-Requires Node.js 18+ (LTS recommended).
+- **[Next.js 15](https://nextjs.org/)** (App Router, RSC, Turbopack)
+- **[React 19](https://react.dev/)**
+- **[Tailwind CSS v4](https://tailwindcss.com/)** — CSS-first config, no `tailwind.config.js`
+- **[Motion](https://motion.dev/)** for scroll & entrance animations
+- **[fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser)** for the Zenn feed
+- TypeScript · Geist font · deployed on Vercel
+
+## Getting started
+
+Requires Node.js 20+.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the site.
+Open [http://localhost:3000](http://localhost:3000).
 
 ## Environment variables
 
-Copy `.env.example` to `.env.local` and fill in the values:
+Copy `.env.example` to `.env.local`:
 
 ```bash
 cp .env.example .env.local
 ```
 
-- `GITHUB_API_TOKEN` — optional GitHub token used to fetch the repository list
-  with a higher rate limit. Without it the site still builds, falling back to
+- `GITHUB_API_TOKEN` — optional. Raises the GitHub API rate limit when fetching
+  the repository list. Without it the site still builds, falling back to
   unauthenticated requests.
 
 ## Scripts
 
-- `npm run dev` — start the dev server (Turbopack)
+- `npm run dev` — dev server (Turbopack)
 - `npm run build` — production build
 - `npm run start` — serve the production build
-- `npm run lint` — run ESLint
+- `npm run lint` — ESLint
 
-## Project structure
+## Structure
 
-- `src/app` — App Router pages, layout, and global styles
-- `src/components` — React components
-- `src/types` — shared TypeScript types
+```
+src/
+  app/         App Router: layout, page, global styles
+  components/  UI: hero, nav, sections, spotlight cards, footer
+  lib/         data fetching (github, zenn) + site content config
+  types/       shared TypeScript types
+```
+
+Content (name, role, socials, skills) lives in `src/lib/site.ts`.
