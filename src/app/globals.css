@@ -126,9 +126,10 @@ body {
   z-index: -1;
   border-radius: inherit;
   background: var(--glass-tint);
-  /* One backdrop pass; the displacement filter does the refraction. */
-  backdrop-filter: blur(2px) saturate(160%);
-  -webkit-backdrop-filter: blur(2px) saturate(160%);
+  /* One backdrop pass; keep the blur light so the displacement warp
+     stays legible. The SVG filter does the refraction. */
+  backdrop-filter: blur(1px) saturate(160%);
+  -webkit-backdrop-filter: blur(1px) saturate(160%);
   filter: url(#glass-distortion);
 }
 

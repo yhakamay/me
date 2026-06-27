@@ -80,16 +80,16 @@ export default function RootLayout({
             >
               <feTurbulence
                 type="fractalNoise"
-                baseFrequency="0.008 0.008"
+                baseFrequency="0.012 0.012"
                 numOctaves={2}
                 seed={5}
                 result="turbulence"
               />
-              <feGaussianBlur in="turbulence" stdDeviation="3" result="softMap" />
+              <feGaussianBlur in="turbulence" stdDeviation="2" result="softMap" />
               <feDisplacementMap
                 in="SourceGraphic"
                 in2="softMap"
-                scale={70}
+                scale={130}
                 xChannelSelector="R"
                 yChannelSelector="G"
               />
