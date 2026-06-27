@@ -280,23 +280,31 @@ export default async function Home() {
 }
 
 async function fetchRepos(): Promise<Repo[]> {
-  const res = await fetch(
-    "https://api.github.com/users/yhakamay/repos?sort=updated&direction=desc?per_page=100",
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}`,
-      },
-      next: {
-        revalidate: 60 * 60 * 24,
-      },
-    }
-  );
-
-  if (!res.ok) {
-    throw new Error(res.statusText);
+  const headers: HeadersInit = {};
+  if (process.env.GITHUB_API_TOKEN) {
+    headers.Authorization = `Bearer ${process.env.GITHUB_API_TOKEN}`;
   }
 
-  return res.json();
+  try {
+    const res = await fetch(
+      "https://api.github.com/users/yhakamay/repos?sort=updated&direction=desc&per_page=100",
+      {
+        headers,
+        next: {
+          revalidate: 60 * 60 * 24,
+        },
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error(`GitHub API: ${res.status} ${res.statusText}`);
+    }
+
+    return res.json();
+  } catch (err) {
+    console.error("Failed to fetch repositories:", err);
+    return [];
+  }
 }
 
 async function getTopRepos(repos: Repo[], count: number): Promise<Repo[]> {
@@ -313,22 +321,23 @@ async function getTopRepos(repos: Repo[], count: number): Promise<Repo[]> {
 }
 
 async function fetchArticles(): Promise<Article[]> {
-  const res = await fetch("https://zenn.dev/yhakamay/feed", {
-    next: {
-      revalidate: 60 * 60 * 24,
-    },
-  });
-  const xml = await res.text();
-  const feed = await xml2js.parseStringPromise(xml);
-  const items = feed.rss.channel[0].item;
+  try {
+    const res = await fetch("https://zenn.dev/yhakamay/feed", {
+      next: {
+        revalidate: 60 * 60 * 24,
+      },
+    });
 
-  if (!res.ok) {
-    throw new Error(res.statusText);
+    if (!res.ok) {
+      throw new Error(`Zenn feed: ${res.status} ${res.statusText}`);
+    }
+
+    const xml = await res.text();
+    const feed = await xml2js.parseStringPromise(xml);
+
+    return feed?.rss?.channel?.[0]?.item ?? [];
+  } catch (err) {
+    console.error("Failed to fetch articles:", err);
+    return [];
   }
-
-  items.forEach((item: Article) => {
-    console.log(item.enclosure);
-  });
-
-  return items;
 }
