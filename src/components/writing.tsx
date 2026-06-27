@@ -1,19 +1,12 @@
+import { CardGrid } from "@/components/card-grid";
 import { SpotlightCard } from "@/components/spotlight-card";
 import { formatDate } from "@/lib/format";
 import { Article } from "@/types/article";
 
 export function Writing({ articles }: { articles: Article[] }) {
-  if (articles.length === 0) {
-    return (
-      <p className="text-sm text-(--muted)">
-        No articles yet — words are brewing.
-      </p>
-    );
-  }
-
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {articles.map((article, i) => (
+    <CardGrid items={articles} empty="No articles yet — words are brewing.">
+      {(article, i) => (
         <SpotlightCard key={article.guid} href={article.link} index={i}>
           <span className="font-mono text-xs text-(--muted)">
             {formatDate(article.pubDate, {
@@ -35,7 +28,7 @@ export function Writing({ articles }: { articles: Article[] }) {
             </span>
           </span>
         </SpotlightCard>
-      ))}
-    </div>
+      )}
+    </CardGrid>
   );
 }
