@@ -1,30 +1,52 @@
+import type { Metadata, Viewport } from "next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
+
 import "./globals.css";
+import { site } from "@/lib/site";
 
-import Footer from "@/components/organisms/footer";
+const description = site.intro;
 
-const title = "yhakamay";
-const description =
-  "yhakamay is ex-42 student, technical consultant, and Next.js lover.";
-
-export const metadata = {
-  metadataBase: new URL("https://yhakamay.me"),
-  title: title,
-  description: description,
+export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
+  title: {
+    default: `${site.name} — ${site.role}`,
+    template: `%s · ${site.handle}`,
+  },
+  description,
+  keywords: [
+    "yhakamay",
+    "Yusuke Hakamaya",
+    "Next.js",
+    "Adobe",
+    "AEM",
+    "technical consultant",
+    "Tokyo",
+  ],
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
   openGraph: {
-    title: title,
+    title: site.name,
+    description,
     type: "website",
-    description: description,
-    siteName: title,
-    url: "https://yhakamay.me",
+    siteName: site.name,
+    url: site.url,
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: title,
-    description: description,
+    title: site.name,
+    description,
     creator: "@yhakamay",
   },
+  alternates: { canonical: site.url },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fbfbfd" },
+    { media: "(prefers-color-scheme: dark)", color: "#0c0c10" },
+  ],
 };
 
 export default function RootLayout({
@@ -33,11 +55,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head />
-      <body className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className="antialiased">
+        <div className="aurora" aria-hidden />
+        <div className="noise" aria-hidden />
         {children}
-        <Footer />
       </body>
     </html>
   );
