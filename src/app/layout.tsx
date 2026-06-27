@@ -3,6 +3,7 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
 import "./globals.css";
+import { CommandPalette } from "@/components/command-palette";
 import { site } from "@/lib/site";
 
 const description = site.intro;
@@ -60,6 +61,7 @@ export default function RootLayout({
         <div className="aurora" aria-hidden />
         <div className="noise" aria-hidden />
         {children}
+        <CommandPalette />
         {/* Refraction filter for .glass surfaces — warps the backdrop at
             the edges. Turbulence → blur → displace; kept lightweight. */}
         <svg
