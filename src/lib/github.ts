@@ -1,7 +1,7 @@
+import { REVALIDATE_SECONDS } from "@/lib/constants";
 import { Repo } from "@/types/repo";
 
 const USERNAME = "yhakamay";
-const REVALIDATE = 60 * 60 * 6; // 6h
 const RECENT_MS = 14 * 24 * 60 * 60 * 1000; // 14 days
 
 /** Fetch the user's public repositories, sorted by most recently updated. */
@@ -16,7 +16,7 @@ export async function getRepos(limit = 6): Promise<Repo[]> {
   try {
     const res = await fetch(
       `https://api.github.com/users/${USERNAME}/repos?sort=updated&direction=desc&per_page=100`,
-      { headers, next: { revalidate: REVALIDATE } }
+      { headers, next: { revalidate: REVALIDATE_SECONDS } }
     );
 
     if (!res.ok) {
