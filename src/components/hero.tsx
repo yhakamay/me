@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 
+import { Magnetic } from "@/components/magnetic";
+import { ScrambleText } from "@/components/scramble-text";
 import { EASE_OUT_SOFT } from "@/lib/motion";
 import { site } from "@/lib/site";
 
@@ -62,7 +64,7 @@ export function Hero() {
           variants={item}
           className="text-balance text-4xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl"
         >
-          Hi, I&apos;m <span className="gradient-text">{site.name}</span>.
+          Hi, I&apos;m <ScrambleText text={site.name} className="gradient-text" />.
           <br />
           {site.tagline}
         </motion.h1>
@@ -76,18 +78,19 @@ export function Hero() {
 
         <motion.div variants={item} className="flex flex-wrap items-center gap-3">
           {site.socials.map((s) => (
-            <Link
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass group rounded-full px-4 py-2 text-sm font-medium transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5"
-            >
-              {s.label}
-              <span className="ml-1 inline-block text-(--muted) transition-transform group-hover:translate-x-0.5">
-                ↗
-              </span>
-            </Link>
+            <Magnetic key={s.label}>
+              <Link
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass group rounded-full px-4 py-2 text-sm font-medium transition-shadow hover:shadow-lg hover:shadow-black/5"
+              >
+                {s.label}
+                <span className="ml-1 inline-block text-(--muted) transition-transform group-hover:translate-x-0.5">
+                  ↗
+                </span>
+              </Link>
+            </Magnetic>
           ))}
         </motion.div>
       </motion.div>

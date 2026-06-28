@@ -159,12 +159,29 @@ body {
   background: linear-gradient(
     100deg,
     var(--color-accent) 0%,
-    var(--color-accent-2) 50%,
-    var(--color-accent-3) 100%
+    var(--color-accent-2) 35%,
+    var(--color-accent-3) 65%,
+    var(--color-accent) 100%
   );
+  /* Oversize the gradient so it can travel across the glyphs. */
+  background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: gradient-sweep 6s linear infinite;
+}
+
+/* Kinetic colour sweep through the headline. */
+@keyframes gradient-sweep {
+  to {
+    background-position: 200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-text {
+    animation: none;
+  }
 }
 
 /* Animated aurora blobs */
