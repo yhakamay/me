@@ -70,7 +70,7 @@ export function Journey() {
       onMouseLeave={() => setPaused(false)}
     >
       {/* ---- the map ---- */}
-      <div className="glass overflow-hidden rounded-3xl lg:col-span-3">
+      <div className="liquid overflow-hidden rounded-3xl lg:col-span-3">
         <div className="flex items-center justify-between border-b border-(--border) px-5 py-3">
           <p className="font-mono text-xs tracking-wider text-(--muted)">
             EAST ASIA · 福岡 → 上海 → 東京
@@ -191,7 +191,7 @@ export function Journey() {
               onClick={() => setActive(i)}
               className={`group flex items-center gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${
                 i === active
-                  ? "glass border-(--border)"
+                  ? "liquid border-(--border)"
                   : "border-transparent hover:bg-(--border)/40"
               }`}
             >

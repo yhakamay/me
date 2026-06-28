@@ -12,7 +12,7 @@ type SpotlightCardProps = {
   children: ReactNode;
 };
 
-/** Glass card with a cursor-following spotlight and reveal animation. */
+/** Liquid card with a cursor-following spotlight and reveal animation. */
 export function SpotlightCard({ href, index = 0, children }: SpotlightCardProps) {
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -37,7 +37,7 @@ export function SpotlightCard({ href, index = 0, children }: SpotlightCardProps)
         target="_blank"
         rel="noopener noreferrer"
         onMouseMove={handleMove}
-        className="group relative block h-full overflow-hidden rounded-2xl glass p-px transition-transform duration-300 hover:-translate-y-1"
+        className="group relative block h-full overflow-hidden rounded-2xl liquid p-px transition-transform duration-300 hover:-translate-y-1"
       >
         <motion.div
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"

@@ -62,8 +62,9 @@ export default function RootLayout({
         <div className="noise" aria-hidden />
         {children}
         <CommandPalette />
-        {/* Refraction filter for .glass surfaces — warps the backdrop at
-            the edges. Turbulence → blur → displace; kept lightweight. */}
+        {/* Refraction filter for .liquid surfaces — ripples the backdrop
+            like water. The turbulence drifts over time so the gel looks
+            as if it's gently flowing; blur softens it, displace bends it. */}
         <svg
           aria-hidden
           width="0"
@@ -73,25 +74,32 @@ export default function RootLayout({
         >
           <defs>
             <filter
-              id="glass-distortion"
-              x="0%"
-              y="0%"
-              width="100%"
-              height="100%"
+              id="liquid-distortion"
+              x="-20%"
+              y="-20%"
+              width="140%"
+              height="140%"
               filterUnits="objectBoundingBox"
             >
               <feTurbulence
                 type="fractalNoise"
-                baseFrequency="0.02 0.02"
+                baseFrequency="0.012 0.016"
                 numOctaves={2}
-                seed={5}
+                seed={7}
                 result="turbulence"
-              />
-              <feGaussianBlur in="turbulence" stdDeviation="1.5" result="softMap" />
+              >
+                <animate
+                  attributeName="baseFrequency"
+                  dur="20s"
+                  values="0.012 0.016;0.018 0.011;0.012 0.016"
+                  repeatCount="indefinite"
+                />
+              </feTurbulence>
+              <feGaussianBlur in="turbulence" stdDeviation="2" result="softMap" />
               <feDisplacementMap
                 in="SourceGraphic"
                 in2="softMap"
-                scale={160}
+                scale={38}
                 xChannelSelector="R"
                 yChannelSelector="G"
               />

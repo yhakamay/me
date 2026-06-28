@@ -49,7 +49,7 @@ export function Hero() {
 
         <motion.div
           variants={item}
-          className="glass inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium text-(--muted)"
+          className="liquid inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium text-(--muted)"
         >
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-(--color-accent-2) opacity-75" />
@@ -81,7 +81,7 @@ export function Hero() {
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="glass group rounded-full px-4 py-2 text-sm font-medium transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5"
+              className="liquid group rounded-full px-4 py-2 text-sm font-medium transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5"
             >
               {s.label}
               <span className="ml-1 inline-block text-(--muted) transition-transform group-hover:translate-x-0.5">

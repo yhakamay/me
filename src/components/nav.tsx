@@ -30,7 +30,7 @@ export function Nav() {
     >
       <nav
         className={`flex w-full max-w-3xl items-center justify-between rounded-full px-5 py-2.5 transition-all duration-300 ${
-          scrolled ? "glass shadow-lg shadow-black/5" : "bg-transparent"
+          scrolled ? "liquid shadow-lg shadow-black/5" : "bg-transparent"
         }`}
       >
         <Link href="#top" className="group flex items-center gap-2">

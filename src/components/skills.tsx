@@ -20,7 +20,7 @@ export function Skills() {
             ease: EASE_OUT_SOFT,
           }}
           whileHover={{ y: -3 }}
-          className="glass rounded-xl px-4 py-2.5 text-sm font-medium"
+          className="liquid rounded-xl px-4 py-2.5 text-sm font-medium"
         >
           {skill}
         </motion.span>

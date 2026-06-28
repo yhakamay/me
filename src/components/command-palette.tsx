@@ -162,7 +162,7 @@ export function CommandPalette() {
   let running = -1;
 
   return (
-    // The backdrop and the glass panel are kept as separate, top-level
+    // The backdrop and the liquid panel are kept as separate, top-level
     // animated elements. Neither has an opacity-animating ancestor —
     // otherwise Chromium withholds their backdrop-filter blur until the
     // ancestor's opacity settles, making the blur appear with a delay.
@@ -188,11 +188,11 @@ export function CommandPalette() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -8, scale: 0.98 }}
           transition={{ duration: 0.22, ease: EASE_OUT_SOFT }}
-          // `position` + `top` are set inline: the `.glass` utility sets
+          // `position` + `top` are set inline: the `.liquid` utility sets
           // `position: relative`, which would otherwise override Tailwind's
           // `fixed` and drop the panel to its static position.
           style={{ position: "fixed", top: "12vh" }}
-          className="glass inset-x-4 z-[101] mx-auto w-auto max-w-xl overflow-hidden rounded-2xl shadow-2xl shadow-black/20"
+          className="liquid inset-x-4 z-[101] mx-auto w-auto max-w-xl overflow-hidden rounded-2xl shadow-2xl shadow-black/20"
         >
             <div className="flex items-center gap-3 border-b border-(--border) px-4">
               <span className="text-(--muted)" aria-hidden>
