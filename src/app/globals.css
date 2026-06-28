@@ -184,68 +184,12 @@ body {
   }
 }
 
-/* Animated aurora blobs */
-@keyframes drift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  33% {
-    transform: translate3d(6%, -8%, 0) scale(1.12);
-  }
-  66% {
-    transform: translate3d(-7%, 5%, 0) scale(0.94);
-  }
-}
-
-.aurora {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.aurora::before,
-.aurora::after {
-  content: "";
-  position: absolute;
-  width: 55vmax;
-  height: 55vmax;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.5;
-  will-change: transform;
-}
-
-.aurora::before {
-  top: -15%;
-  left: -10%;
-  background: radial-gradient(circle, var(--color-accent), transparent 65%);
-  animation: drift 18s var(--ease-out-soft) infinite;
-}
-
-.aurora::after {
-  bottom: -20%;
-  right: -10%;
-  background: radial-gradient(circle, var(--color-accent-2), transparent 65%);
-  animation: drift 22s var(--ease-out-soft) infinite reverse;
-}
-
-@media (prefers-color-scheme: dark) {
-  .aurora::before,
-  .aurora::after {
-    opacity: 0.32;
-  }
-}
+/* The animated background is now the cursor-reactive halftone dot field
+   (see components/dot-field.tsx), rendered on a <canvas>. */
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  .aurora::before,
-  .aurora::after {
-    animation: none;
   }
 }
 
