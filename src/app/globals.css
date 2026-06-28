@@ -27,17 +27,17 @@
   --card: oklch(1 0 0 / 0.55);
   --border: oklch(0.5 0.02 280 / 0.16);
 
-  /* Liquid (water / slime) layers — light.
-     The body is a saturated, tinted translucency; the surface is a wet
-     glint over a volumetric inner shadow. */
-  --liquid-edge: oklch(1 0 0 / 0.45); /* surface-tension rim */
-  --liquid-tint: color-mix(in oklch, var(--color-accent-2) 14%, oklch(1 0 0 / 0.34));
-  --liquid-tint-hi: color-mix(in oklch, var(--color-accent-2) 22%, oklch(1 0 0 / 0.2));
-  --liquid-glint: oklch(1 0 0 / 0.8); /* bright wet highlight blob */
-  --liquid-shine: oklch(1 0 0 / 0.9); /* specular rim, top-left */
-  --liquid-shine-soft: oklch(1 0 0 / 0.4);
-  --liquid-depth: color-mix(in oklch, var(--color-accent) 30%, oklch(0.2 0.03 280 / 0.35)); /* volume */
-  --liquid-shadow: oklch(0.2 0.03 280 / 0.2); /* soft float */
+  /* Liquid (water / slime) layers — light. CSS-only gel: a translucent
+     tinted body the backdrop shows through, plus wet highlights and a
+     volumetric inner shadow. No backdrop-filter / SVG filter (keeps
+     scrolling smooth and stops the body bleeding past rounded corners). */
+  --liquid-fill: oklch(1 0 0 / 0.5); /* translucent gel body */
+  --liquid-tint: color-mix(in oklch, var(--color-accent-2) 18%, oklch(1 0 0 / 0.5));
+  --liquid-glint: oklch(1 0 0 / 0.95); /* bright specular point */
+  --liquid-sheen: oklch(1 0 0 / 0.85); /* travelling wet sheen */
+  --liquid-edge: oklch(1 0 0 / 0.55); /* surface-tension rim */
+  --liquid-depth: oklch(0.45 0.12 285 / 0.28); /* bottom volume */
+  --liquid-shadow: oklch(0.2 0.03 280 / 0.22); /* soft float */
   --liquid-shadow-2: oklch(0.2 0.03 280 / 0.1);
   color-scheme: light;
 }
@@ -52,13 +52,12 @@
 
     /* Liquid (water / slime) layers — dark. A deeper, more saturated
        gel with quieter wet highlights. */
-    --liquid-edge: oklch(1 0 0 / 0.16);
-    --liquid-tint: color-mix(in oklch, var(--color-accent) 22%, oklch(0.2 0.04 285 / 0.4));
-    --liquid-tint-hi: color-mix(in oklch, var(--color-accent-2) 30%, oklch(0.3 0.06 280 / 0.25));
-    --liquid-glint: oklch(1 0 0 / 0.4);
-    --liquid-shine: oklch(1 0 0 / 0.45);
-    --liquid-shine-soft: oklch(1 0 0 / 0.14);
-    --liquid-depth: oklch(0 0 0 / 0.55);
+    --liquid-fill: oklch(0.6 0.12 285 / 0.16);
+    --liquid-tint: color-mix(in oklch, var(--color-accent) 26%, oklch(0.3 0.05 285 / 0.2));
+    --liquid-glint: oklch(1 0 0 / 0.55);
+    --liquid-sheen: oklch(1 0 0 / 0.34);
+    --liquid-edge: oklch(1 0 0 / 0.18);
+    --liquid-depth: oklch(0 0 0 / 0.5);
     --liquid-shadow: oklch(0 0 0 / 0.55);
     --liquid-shadow-2: oklch(0 0 0 / 0.3);
     color-scheme: dark;
@@ -112,92 +111,70 @@ body {
 
 /* ---- Liquid (water / slime) ---------------------------------------
  * Surfaces tagged `.liquid` read as a soft, wet blob of gel rather than
- * a pane of glass — built in layers so any element picks it up without
- * markup changes:
- *   ::before  the body of the liquid — a saturated, tinted translucency
- *             warped by the #liquid-distortion SVG filter (animated
- *             turbulence → the backdrop ripples through it like water)
- *             and gently jiggling so the volume feels alive
- *   content   the element's own children
- *   ::after   the wet surface — a bright specular glint top-left over a
- *             rounded inner shadow that gives the blob real volume
- * The drop shadow + soft inner highlight sell the weight of the fluid.
+ * a pane of glass — and it's built entirely from cheap, GPU-friendly
+ * primitives (gradients + shadows + a transform-only sheen). No
+ * backdrop-filter and no SVG filter: those caused the body to bleed past
+ * rounded corners on iOS and made scrolling janky.
+ *   element    a translucent, tinted gel body (the backdrop shows
+ *              through) with a specular point baked in, a crisp wet rim
+ *              and a volumetric inner shadow for weight
+ *   ::before   a wet sheen of light that slowly slides across the
+ *              surface — animated with transform only, so it's composited
+ *              and never repaints on scroll
  * ------------------------------------------------------------------ */
 .liquid {
   position: relative;
   isolation: isolate;
   overflow: hidden;
   border: 1px solid var(--liquid-edge);
+  /* Translucent gel body — backdrop shows through tinted, no blur. */
+  background:
+    radial-gradient(34% 26% at 22% 14%, var(--liquid-glint), transparent 60%),
+    radial-gradient(140% 120% at 30% 0%, var(--liquid-tint), transparent 64%),
+    var(--liquid-fill);
   box-shadow:
-    0 10px 30px -12px var(--liquid-shadow),
-    0 4px 10px -7px var(--liquid-shadow-2),
-    inset 0 1px 0 0 var(--liquid-shine-soft);
+    0 12px 28px -16px var(--liquid-shadow),
+    0 3px 8px -5px var(--liquid-shadow-2),
+    inset 0 1px 1px 0 var(--liquid-sheen),
+    inset 0 -10px 16px -12px var(--liquid-depth);
 }
 
 .liquid::before {
   content: "";
   position: absolute;
-  inset: -2px; /* let the warped body bleed past the edge */
+  inset: -40% -12%;
   z-index: -1;
-  border-radius: inherit;
-  background:
-    radial-gradient(125% 100% at 30% 0%, var(--liquid-tint-hi), transparent 62%),
-    var(--liquid-tint);
-  /* Backdrop pass; the saturation boost makes the gel feel wet. The SVG
-     filter does the rippling water refraction. */
-  backdrop-filter: blur(2px) saturate(200%);
-  -webkit-backdrop-filter: blur(2px) saturate(200%);
-  filter: url(#liquid-distortion);
-  animation: liquid-jiggle 7s ease-in-out infinite;
-}
-
-.liquid::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  border-radius: inherit;
   pointer-events: none;
-  background: radial-gradient(
-    42% 30% at 26% 16%,
-    var(--liquid-glint),
-    transparent 70%
+  background: linear-gradient(
+    122deg,
+    transparent 40%,
+    var(--liquid-sheen) 49%,
+    transparent 58%
   );
-  box-shadow:
-    inset 2px 3px 5px -3px var(--liquid-shine),
-    inset -2px -3px 8px -4px var(--liquid-depth),
-    inset 0 0 14px 0 var(--liquid-shine-soft);
-  mix-blend-mode: screen;
+  opacity: 0.5;
+  transform: translate3d(-14%, 0, 0);
+  animation: liquid-sheen 9s var(--ease-out-soft) infinite;
+  will-change: transform;
 }
 
-/* The body of the liquid slowly shifts inside the surface — content
-   stays put, only the gel jostles, the way a filled jelly would. */
-@keyframes liquid-jiggle {
+.liquid:hover::before {
+  opacity: 0.85;
+}
+
+/* A band of light drifting side to side — transform only (composited). */
+@keyframes liquid-sheen {
   0%,
   100% {
-    transform: translate3d(0, 0, 0) scale(1.02, 1.02);
+    transform: translate3d(-14%, 0, 0);
   }
-  33% {
-    transform: translate3d(-1.5%, 1%, 0) scale(1.05, 1.04);
-  }
-  66% {
-    transform: translate3d(1.5%, -1%, 0) scale(1.04, 1.06);
+  50% {
+    transform: translate3d(14%, 0, 0);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .liquid::before {
     animation: none;
-  }
-}
-
-/* Where backdrop-filter (or the SVG filter) is unavailable, the tint
-   still reads as a simple translucent gel panel. */
-@supports not ((backdrop-filter: blur(1px)) or
-  (-webkit-backdrop-filter: blur(1px))) {
-  .liquid::before {
-    background: var(--liquid-tint);
-    filter: none;
   }
 }
 
@@ -213,8 +190,8 @@ body {
   color: transparent;
 }
 
-/* Animated aurora blobs — drifting while their outline morphs, so the
-   background reads as slow-moving pools of liquid. */
+/* Animated aurora blobs — drifting pools of colour behind the gel.
+   Transform-only so they stay composited and don't repaint on scroll. */
 @keyframes drift {
   0%,
   100% {
@@ -225,19 +202,6 @@ body {
   }
   66% {
     transform: translate3d(-7%, 5%, 0) scale(0.94);
-  }
-}
-
-@keyframes liquid-morph {
-  0%,
-  100% {
-    border-radius: 42% 58% 57% 43% / 45% 47% 53% 55%;
-  }
-  33% {
-    border-radius: 62% 38% 45% 55% / 55% 62% 38% 45%;
-  }
-  66% {
-    border-radius: 45% 55% 62% 38% / 38% 45% 55% 62%;
   }
 }
 
@@ -258,25 +222,21 @@ body {
   border-radius: 50%;
   filter: blur(80px);
   opacity: 0.5;
-  will-change: transform, border-radius;
+  will-change: transform;
 }
 
 .aurora::before {
   top: -15%;
   left: -10%;
   background: radial-gradient(circle, var(--color-accent), transparent 65%);
-  animation:
-    drift 18s var(--ease-out-soft) infinite,
-    liquid-morph 14s ease-in-out infinite;
+  animation: drift 18s var(--ease-out-soft) infinite;
 }
 
 .aurora::after {
   bottom: -20%;
   right: -10%;
   background: radial-gradient(circle, var(--color-accent-2), transparent 65%);
-  animation:
-    drift 22s var(--ease-out-soft) infinite reverse,
-    liquid-morph 17s ease-in-out infinite reverse;
+  animation: drift 22s var(--ease-out-soft) infinite reverse;
 }
 
 @media (prefers-color-scheme: dark) {
