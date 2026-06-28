@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 
 import "./globals.css";
 import { CommandPalette } from "@/components/command-palette";
+import { DotField } from "@/components/dot-field";
 import { site } from "@/lib/site";
 
 const description = site.intro;
@@ -58,7 +59,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body className="antialiased">
-        <div className="aurora" aria-hidden />
+        <DotField />
         <div className="noise" aria-hidden />
         {children}
         <CommandPalette />

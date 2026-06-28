@@ -182,77 +182,37 @@ body {
   background: linear-gradient(
     100deg,
     var(--color-accent) 0%,
-    var(--color-accent-2) 50%,
-    var(--color-accent-3) 100%
+    var(--color-accent-2) 35%,
+    var(--color-accent-3) 65%,
+    var(--color-accent) 100%
   );
+  /* Oversize the gradient so it can travel across the glyphs. */
+  background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: gradient-sweep 6s linear infinite;
 }
 
-/* Animated aurora blobs — drifting pools of colour behind the gel.
-   Transform-only so they stay composited and don't repaint on scroll. */
-@keyframes drift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  33% {
-    transform: translate3d(6%, -8%, 0) scale(1.12);
-  }
-  66% {
-    transform: translate3d(-7%, 5%, 0) scale(0.94);
-  }
-}
-
-.aurora {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.aurora::before,
-.aurora::after {
-  content: "";
-  position: absolute;
-  width: 55vmax;
-  height: 55vmax;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.5;
-  will-change: transform;
-}
-
-.aurora::before {
-  top: -15%;
-  left: -10%;
-  background: radial-gradient(circle, var(--color-accent), transparent 65%);
-  animation: drift 18s var(--ease-out-soft) infinite;
-}
-
-.aurora::after {
-  bottom: -20%;
-  right: -10%;
-  background: radial-gradient(circle, var(--color-accent-2), transparent 65%);
-  animation: drift 22s var(--ease-out-soft) infinite reverse;
-}
-
-@media (prefers-color-scheme: dark) {
-  .aurora::before,
-  .aurora::after {
-    opacity: 0.32;
+/* Kinetic colour sweep through the headline. */
+@keyframes gradient-sweep {
+  to {
+    background-position: 200% 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .gradient-text {
+    animation: none;
+  }
+}
+
+/* The animated background is now the cursor-reactive halftone dot field
+   (see components/dot-field.tsx), rendered on a <canvas>. */
+
+@media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  .aurora::before,
-  .aurora::after {
-    animation: none;
   }
 }
 
