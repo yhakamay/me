@@ -1,5 +1,6 @@
+import Link from "next/link";
+
 import { CardGrid } from "@/components/card-grid";
-import { SpotlightCard } from "@/components/spotlight-card";
 import { formatDate } from "@/lib/format";
 import { Repo } from "@/types/repo";
 
@@ -9,35 +10,29 @@ export function Projects({ repos }: { repos: Repo[] }) {
       items={repos}
       empty="Repositories are taking a break — check back soon."
     >
-      {(repo, i) => (
-        <SpotlightCard key={repo.id} href={repo.html_url} index={i}>
-          <div className="mb-3 flex items-center justify-between">
-            <span className="font-mono text-xs text-(--muted)">
+      {(repo) => (
+        <li key={repo.id} className="border-b border-(--rule) last:border-0">
+          <Link
+            href={repo.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-baseline justify-between gap-6 py-4"
+          >
+            <span className="min-w-0">
+              <span className="block text-lg font-medium leading-snug group-hover:italic">
+                {repo.name}
+              </span>
+              <span className="mt-0.5 block truncate text-sm leading-snug text-(--muted)">
+                {repo.description ?? "No description provided."}
+              </span>
+            </span>
+            <span className="shrink-0 whitespace-nowrap text-right text-xs text-(--muted)">
+              {repo.recent && <em>recently updated · </em>}
+              {repo.language && `${repo.language} · `}
               {formatDate(repo.updated_at)}
             </span>
-            {repo.recent && (
-              <span className="rounded-full bg-(--color-accent)/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-(--color-accent)">
-                Recent
-              </span>
-            )}
-          </div>
-          <h3 className="text-lg font-semibold tracking-tight transition-colors group-hover:text-(--color-accent)">
-            {repo.name}
-          </h3>
-          <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-(--muted)">
-            {repo.description ?? "No description provided."}
-          </p>
-          <div className="mt-4 flex items-center gap-4 text-xs text-(--muted)">
-            {repo.language && (
-              <span className="inline-flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-(--color-accent-2)" />
-                {repo.language}
-              </span>
-            )}
-            {repo.stargazers_count > 0 && <span>★ {repo.stargazers_count}</span>}
-            {repo.forks_count > 0 && <span>⑂ {repo.forks_count}</span>}
-          </div>
-        </SpotlightCard>
+          </Link>
+        </li>
       )}
     </CardGrid>
   );

@@ -1,33 +1,42 @@
+import Link from "next/link";
+
 import { CardGrid } from "@/components/card-grid";
-import { SpotlightCard } from "@/components/spotlight-card";
 import { formatDate } from "@/lib/format";
 import { Article } from "@/types/article";
 
 export function Writing({ articles }: { articles: Article[] }) {
   return (
     <CardGrid items={articles} empty="No articles yet — words are brewing.">
-      {(article, i) => (
-        <SpotlightCard key={article.guid} href={article.link} index={i}>
-          <span className="font-mono text-xs text-(--muted)">
-            {formatDate(article.pubDate, {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })}
-          </span>
-          <h3 className="mt-3 line-clamp-2 text-lg font-semibold tracking-tight transition-colors group-hover:text-(--color-accent)">
-            {article.title}
-          </h3>
-          <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-(--muted)">
-            {article.description || "Read on Zenn."}
-          </p>
-          <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-(--color-accent)">
-            Read on Zenn
-            <span className="transition-transform group-hover:translate-x-0.5">
-              →
+      {(article) => (
+        <li
+          key={article.guid}
+          className="border-b border-(--rule) last:border-0"
+        >
+          <Link
+            href={article.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-baseline justify-between gap-6 py-4"
+          >
+            <span className="min-w-0">
+              <span className="block text-lg font-medium leading-snug group-hover:italic">
+                {article.title}
+              </span>
+              {article.description && (
+                <span className="mt-0.5 block truncate text-sm leading-snug text-(--muted)">
+                  {article.description}
+                </span>
+              )}
             </span>
-          </span>
-        </SpotlightCard>
+            <span className="shrink-0 whitespace-nowrap text-right text-xs text-(--muted)">
+              {formatDate(article.pubDate, {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </span>
+          </Link>
+        </li>
       )}
     </CardGrid>
   );
