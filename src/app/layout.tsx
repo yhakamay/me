@@ -1,11 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
+import { Newsreader } from "next/font/google";
 
 import "./globals.css";
 import { CommandPalette } from "@/components/command-palette";
-import { DotField } from "@/components/dot-field";
 import { site } from "@/lib/site";
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-newsreader",
+  display: "swap",
+});
 
 const description = site.intro;
 
@@ -46,8 +52,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fbfbfd" },
-    { media: "(prefers-color-scheme: dark)", color: "#0c0c10" },
+    { media: "(prefers-color-scheme: light)", color: "#f6f3ea" },
+    { media: "(prefers-color-scheme: dark)", color: "#15140f" },
   ],
 };
 
@@ -57,48 +63,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="en" className={newsreader.variable}>
       <body className="antialiased">
-        <DotField />
-        <div className="noise" aria-hidden />
         {children}
         <CommandPalette />
-        {/* Refraction filter for .glass surfaces — warps the backdrop at
-            the edges. Turbulence → blur → displace; kept lightweight. */}
-        <svg
-          aria-hidden
-          width="0"
-          height="0"
-          className="pointer-events-none absolute"
-          style={{ position: "absolute", width: 0, height: 0 }}
-        >
-          <defs>
-            <filter
-              id="glass-distortion"
-              x="0%"
-              y="0%"
-              width="100%"
-              height="100%"
-              filterUnits="objectBoundingBox"
-            >
-              <feTurbulence
-                type="fractalNoise"
-                baseFrequency="0.02 0.02"
-                numOctaves={2}
-                seed={5}
-                result="turbulence"
-              />
-              <feGaussianBlur in="turbulence" stdDeviation="1.5" result="softMap" />
-              <feDisplacementMap
-                in="SourceGraphic"
-                in2="softMap"
-                scale={160}
-                xChannelSelector="R"
-                yChannelSelector="G"
-              />
-            </filter>
-          </defs>
-        </svg>
       </body>
     </html>
   );

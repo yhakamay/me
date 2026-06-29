@@ -34,7 +34,7 @@ export function Nav() {
         }`}
       >
         <Link href="#top" className="group flex items-center gap-2">
-          <span className="grid h-7 w-7 place-items-center rounded-full bg-gradient-to-br from-(--color-accent) to-(--color-accent-2) text-xs font-bold text-white">
+          <span className="grid h-7 w-7 place-items-center rounded-full bg-(--fg) text-xs font-bold text-(--bg)">
             y
           </span>
           <span className="text-sm font-medium tracking-tight">
