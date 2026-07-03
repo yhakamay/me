@@ -13,6 +13,7 @@ const links = [
   { label: "Skills", href: "#skills" },
   { label: "Work", href: "#work" },
   { label: "Writing", href: "#writing" },
+  { label: "Gallery ✦", href: "/" },
 ];
 
 export function Nav() {

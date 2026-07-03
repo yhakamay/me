@@ -44,6 +44,40 @@ export function CommandPalette() {
   }, []);
 
   const items = useMemo<Item[]>(() => {
+    const allEditions: Item[] = [
+      {
+        id: "edition-world",
+        label: "Enter the interactive gallery",
+        hint: "3D · WASM",
+        group: "Navigate",
+        // "/play" keyword makes the hidden command discoverable by typing it.
+        keywords:
+          "world gallery interactive 3d cub3d wasm webgpu walk game /play play",
+        run: () => {
+          window.location.assign("/play");
+          close();
+        },
+      },
+      {
+        id: "edition-classic",
+        label: "Read the classic edition",
+        hint: "Print",
+        group: "Navigate",
+        keywords: "classic print editorial home reading text",
+        run: () => {
+          window.location.assign("/classic");
+          close();
+        },
+      },
+    ];
+    const editions = allEditions.filter((it) => {
+      if (typeof window === "undefined") return true;
+      const path = window.location.pathname;
+      return it.id === "edition-world"
+        ? path !== "/" && path !== "/play"
+        : path !== "/classic";
+    });
+
     const nav: Item[] = [
       ["about", "About"],
       ["skills", "Skills & Tools"],
@@ -100,7 +134,7 @@ export function CommandPalette() {
       },
     ];
 
-    return [...nav, ...links, ...actions];
+    return [...editions, ...nav, ...links, ...actions];
   }, [close]);
 
   const results = useMemo(() => {

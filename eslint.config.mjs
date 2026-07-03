@@ -3,7 +3,8 @@ import typescript from "eslint-config-next/typescript";
 
 /** @type {import('eslint').Linter.Config[]} */
 const eslintConfig = [
-  { ignores: [".next/**", "out/**", "build/**", "next-env.d.ts"] },
+  // asm/ is AssemblyScript — TypeScript syntax, but compiled by asc, not tsc.
+  { ignores: [".next/**", "out/**", "build/**", "next-env.d.ts", "asm/**"] },
   ...coreWebVitals,
   ...typescript,
 ];
