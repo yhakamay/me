@@ -70,6 +70,18 @@ body {
   }
 }
 
+/* Cross-document View Transitions: fade between the interactive gallery
+ * ("/") and the classic edition ("/classic") like turning a page. */
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
+
 /* ------------------------------------------------------------------ *
  * Utilities / components
  * ------------------------------------------------------------------ */

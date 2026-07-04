@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "asm:build": "asc asm/index.ts --config asconfig.json --target release",
+    "predev": "npm run asm:build",
     "dev": "next dev --turbopack",
+    "prebuild": "npm run asm:build",
     "build": "next build",
     "start": "next start",
     "lint": "eslint ."
@@ -20,6 +23,8 @@
     "@types/node": "^26.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@webgpu/types": "^0.1.71",
+    "assemblyscript": "^0.28.19",
     "eslint": "^9.18.0",
     "eslint-config-next": "^16.2.9",
     "tailwindcss": "^4.3.2",
