@@ -70,29 +70,34 @@ export function World({
       tagline: site.tagline,
     };
 
-    Engine.create(canvas, minimapRef.current, data, {
-      onPrompt: setPoi,
-      onStats: (renderer, fps) => setStats({ renderer, fps }),
-    })
-      .then((engine) => {
-        if (cancelled) {
-          engine.destroy();
-          return;
-        }
-        engineRef.current = engine;
-        if (autoEnter) {
-          // /play: no user gesture yet, so walking starts immediately and
-          // pointer lock is picked up on the first canvas click.
-          engine.start();
-          setPhase("playing");
-        } else {
-          setPhase("ready");
-        }
+    // Deferred start keeps StrictMode's throwaway first mount from
+    // configuring the canvas with a GPU device it immediately destroys —
+    // two devices on one canvas can deadlock the compositor.
+    const timer = window.setTimeout(() => {
+      Engine.create(canvas, minimapRef.current, data, {
+        onPrompt: setPoi,
+        onStats: (renderer, fps) => setStats({ renderer, fps }),
       })
-      .catch((err) => {
-        console.error("world: engine failed to start", err);
-        if (!cancelled) setPhase("failed");
-      });
+        .then((engine) => {
+          if (cancelled) {
+            engine.destroy();
+            return;
+          }
+          engineRef.current = engine;
+          if (autoEnter) {
+            // /play: no user gesture yet, so walking starts immediately and
+            // pointer lock is picked up on the first canvas click.
+            engine.start();
+            setPhase("playing");
+          } else {
+            setPhase("ready");
+          }
+        })
+        .catch((err) => {
+          console.error("world: engine failed to start", err);
+          if (!cancelled) setPhase("failed");
+        });
+    }, 80);
 
     const onLockChange = () => {
       const locked = document.pointerLockElement === canvas;
@@ -105,6 +110,7 @@ export function World({
 
     return () => {
       cancelled = true;
+      window.clearTimeout(timer);
       document.removeEventListener("pointerlockchange", onLockChange);
       engineRef.current?.destroy();
       engineRef.current = null;

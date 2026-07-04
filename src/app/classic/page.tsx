@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
+import { Suminagashi } from "@/components/suminagashi";
 import { Journey } from "@/components/journey";
 import { Nav } from "@/components/nav";
 import { Projects } from "@/components/projects";
@@ -22,8 +23,9 @@ export default async function Classic() {
 
   return (
     <>
+      <Suminagashi />
       <Nav />
-      <main className="mx-auto w-full max-w-5xl px-5 sm:px-8">
+      <main className="relative z-10 mx-auto w-full max-w-5xl px-5 sm:px-8">
         <Hero />
 
         <Section id="about" index="01" title="About">
@@ -66,7 +68,7 @@ export default async function Classic() {
           <Writing articles={articles} />
         </Section>
       </main>
-      <div className="mx-auto w-full max-w-5xl px-5 sm:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-5xl px-5 sm:px-8">
         <Footer />
       </div>
     </>
