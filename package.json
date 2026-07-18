@@ -25,7 +25,7 @@
     "@types/react-dom": "^19.0.0",
     "@webgpu/types": "^0.1.71",
     "assemblyscript": "^0.28.19",
-    "eslint": "^9.39.4",
+    "eslint": "^9.39.5",
     "eslint-config-next": "^16.2.10",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3"
