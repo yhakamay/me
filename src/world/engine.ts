@@ -126,12 +126,7 @@ export class Engine {
 
     const palette = readPalette();
     applyPalette(wasm, palette);
-    const atlas = new Uint8Array(
-      wasm.memory.buffer,
-      wasm.texPtr(),
-      TEX_COUNT * TEX_SIZE * TEX_SIZE * 4
-    );
-    await buildAtlas(atlas, data, palette);
+    await buildAtlas(atlasBuffer(wasm), data, palette);
 
     wasm.setPlayer(SPAWN.x, SPAWN.y, SPAWN.ang);
 
@@ -259,12 +254,7 @@ export class Engine {
   private async applyTheme(): Promise<void> {
     const palette = readPalette();
     applyPalette(this.wasm, palette);
-    const atlas = new Uint8Array(
-      this.wasm.memory.buffer,
-      this.wasm.texPtr(),
-      TEX_COUNT * TEX_SIZE * TEX_SIZE * 4
-    );
-    await buildAtlas(atlas, this.data, palette);
+    await buildAtlas(atlasBuffer(this.wasm), this.data, palette);
   }
 
   private drawMinimap(): void {
@@ -321,6 +311,14 @@ function applyPalette(wasm: WasmExports, p: Palette): void {
     packColor(p.bg),
     packColor(mixHex(p.bg, p.fg, 0.1)),
     packColor(mixHex(p.bg, p.fg, 0.035))
+  );
+}
+
+function atlasBuffer(wasm: WasmExports): Uint8Array {
+  return new Uint8Array(
+    wasm.memory.buffer,
+    wasm.texPtr(),
+    TEX_COUNT * TEX_SIZE * TEX_SIZE * 4
   );
 }
 
