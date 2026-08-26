@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { EASE_OUT_SOFT } from "@/lib/motion";
@@ -31,6 +32,7 @@ function goTo(id: string) {
 }
 
 export function CommandPalette() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [index, setIndex] = useState(0);
@@ -54,7 +56,7 @@ export function CommandPalette() {
         keywords:
           "world gallery interactive 3d cub3d wasm webgpu walk game /play play",
         run: () => {
-          window.location.assign("/play");
+          router.push("/play");
           close();
         },
       },
@@ -65,7 +67,7 @@ export function CommandPalette() {
         group: "Navigate",
         keywords: "classic print editorial home reading text",
         run: () => {
-          window.location.assign("/classic");
+          router.push("/classic");
           close();
         },
       },
@@ -135,7 +137,7 @@ export function CommandPalette() {
     ];
 
     return [...editions, ...nav, ...links, ...actions];
-  }, [close]);
+  }, [close, router]);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
