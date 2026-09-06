@@ -23,7 +23,7 @@
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^26.4.1",
     "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
+    "@types/react-dom": "^19.2.7",
     "@webgpu/types": "^0.1.72",
     "assemblyscript": "^0.28.20",
     "eslint": "^9.39.5",
