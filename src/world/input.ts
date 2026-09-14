@@ -4,6 +4,8 @@ const KEY_TURN_SPEED = 2.4; // rad/s
 const PAD_LOOK_SPEED = 2.6; // rad/s
 const PITCH_SENS = 0.55; // horizon pixels per mouse pixel
 
+const clamp1 = (v: number) => Math.max(-1, Math.min(1, v));
+
 export type InputFrame = {
   fwd: number;
   strafe: number;
@@ -96,8 +98,8 @@ export class Input {
         if (t.identifier === this.moveTouchId) {
           const dx = (t.clientX - this.moveOrigin.x) / 48;
           const dy = (t.clientY - this.moveOrigin.y) / 48;
-          this.joy.x = Math.max(-1, Math.min(1, dx));
-          this.joy.y = Math.max(-1, Math.min(1, dy));
+          this.joy.x = clamp1(dx);
+          this.joy.y = clamp1(dy);
         } else if (t.identifier === this.lookTouchId) {
           this.lookDX += t.clientX - this.lookLast.x;
           this.lookDY += t.clientY - this.lookLast.y;
@@ -184,8 +186,8 @@ export class Input {
     this.interactQueued = false;
 
     return {
-      fwd: Math.max(-1, Math.min(1, fwd)) * run,
-      strafe: Math.max(-1, Math.min(1, strafe)) * run,
+      fwd: clamp1(fwd) * run,
+      strafe: clamp1(strafe) * run,
       turn,
       dPitch,
       interact,
