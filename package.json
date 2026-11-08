@@ -13,7 +13,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "fast-xml-parser": "^5.11.2",
+    "fast-xml-parser": "^5.12.0",
     "motion": "^14.9.1",
     "next": "^16.4.3",
     "react": "^19.3.0",
