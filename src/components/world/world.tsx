@@ -101,7 +101,7 @@ export function World({
 
     const onLockChange = () => {
       const locked = document.pointerLockElement === canvas;
-      if (!locked && phaseRef.current === "playing" && !window.matchMedia("(pointer: coarse)").matches) {
+      if (!locked && phaseRef.current === "playing" && !getCoarsePointer()) {
         engineRef.current?.stop();
         setPhase("paused");
       }
@@ -125,17 +125,7 @@ export function World({
     if (!engine || !canvas) return;
     engine.start();
     setPhase("playing");
-    if (!window.matchMedia("(pointer: coarse)").matches) {
-      // Chrome returns a promise that rejects when pointer lock is not
-      // available (iframes, permissions) — the keyboard still works then.
-      try {
-        void Promise.resolve(canvas.requestPointerLock?.()).catch(
-          () => undefined
-        );
-      } catch {
-        // Older engines throw synchronously; walking works regardless.
-      }
-    }
+    if (!getCoarsePointer()) requestPointerLockSafely(canvas);
   }, [setPhase]);
 
   const pause = useCallback(() => {
@@ -158,17 +148,11 @@ export function World({
           if (
             phaseRef.current !== "playing" ||
             document.pointerLockElement ||
-            window.matchMedia("(pointer: coarse)").matches
+            getCoarsePointer()
           ) {
             return;
           }
-          try {
-            void Promise.resolve(
-              canvasRef.current?.requestPointerLock?.()
-            ).catch(() => undefined);
-          } catch {
-            // Pointer lock unavailable — keyboard walking still works.
-          }
+          if (canvasRef.current) requestPointerLockSafely(canvasRef.current);
         }}
         className="h-full w-full touch-none"
         aria-label="A walkable 3D gallery of Yusuke Hakamaya's work"
@@ -352,14 +336,29 @@ export function World({
   );
 }
 
+const COARSE_POINTER_QUERY = "(pointer: coarse)";
+
 function subscribeCoarsePointer(onChange: () => void): () => void {
-  const mq = window.matchMedia("(pointer: coarse)");
+  const mq = window.matchMedia(COARSE_POINTER_QUERY);
   mq.addEventListener("change", onChange);
   return () => mq.removeEventListener("change", onChange);
 }
 
 function getCoarsePointer(): boolean {
-  return window.matchMedia("(pointer: coarse)").matches;
+  return window.matchMedia(COARSE_POINTER_QUERY).matches;
+}
+
+/**
+ * Chrome returns a promise that rejects when pointer lock is not available
+ * (iframes, permissions); older engines throw synchronously. Either way the
+ * keyboard still walks, so failures are swallowed.
+ */
+function requestPointerLockSafely(canvas: HTMLCanvasElement): void {
+  try {
+    void Promise.resolve(canvas.requestPointerLock?.()).catch(() => undefined);
+  } catch {
+    // Pointer lock unavailable — keyboard walking still works.
+  }
 }
 
 /** Renders the virtual-stick origin/knob while the left thumb is down. */
