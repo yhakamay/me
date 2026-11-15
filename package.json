@@ -28,7 +28,7 @@
     "assemblyscript": "^0.28.20",
     "eslint": "^10.14.0",
     "eslint-config-next": "^16.4.5",
-    "tailwindcss": "^4.3.4",
+    "tailwindcss": "^4.3.5",
     "typescript": "^6.0.3",
     "vitest": "^5.1.0"
   },
